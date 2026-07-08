@@ -7,7 +7,6 @@
 
 import Foundation
 import HTML
-import HTMLComponents
 
 /// A component for displaying empty states with optional icon, title, description, and action
 public struct EmptyState<Action: HTML.View>: HTML.View {
@@ -68,7 +67,7 @@ public struct EmptyState<Action: HTML.View>: HTML.View {
 
                 // Description
                 if let description = description {
-                    HTMLComponents.Paragraph { description }
+                    Paragraph { description }
                         .color(.text.secondary)
                         .maxWidth(.rem(30))
                         .margin(horizontal: .auto)

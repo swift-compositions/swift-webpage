@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import HTMLComponents
+import HTML
 
 extension HTML.View {
     @HTML.Builder

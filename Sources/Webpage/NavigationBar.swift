@@ -8,7 +8,6 @@
 import Dependencies
 import Foundation
 import HTML
-import HTMLComponents
 
 public struct NavigationBar: HTML.View {
     let logo: any HTML.View
@@ -239,7 +238,7 @@ public struct NavigationBarSVGLogo: HTML.View {
     }
 
     public var body: some HTML.View {
-        HTMLComponents.Link(href: href) {
+        Link(href: href) {
             svg
         }
     }
@@ -275,7 +274,7 @@ public struct NavigationBarCenteredNavItems: HTML.View {
         }
         public var body: some HTML.View {
             li {
-                HTMLComponents.Link(
+                Link(
                     title,
                     href: href
                 )
@@ -319,7 +318,7 @@ public struct NavigationBarTrailingNavItems: HTML.View {
         }
         public var body: some HTML.View {
             li {
-                HTMLComponents.Link(
+                Link(
                     title,
                     href: href
                 )

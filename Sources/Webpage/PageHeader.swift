@@ -1,5 +1,5 @@
 import Foundation
-import HTMLComponents
+import HTML
 
 public struct PageHeader<Title: HTML.View, Blurb: HTML.View, CallToAction: HTML.View>: HTML.View {
     var title: Title

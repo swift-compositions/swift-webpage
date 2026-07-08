@@ -7,8 +7,7 @@
 
 import Foundation
 import HTML
-import HTMLComponents
-import HTMLTheme
+import CSS_Theming
 
 // MARK: - NavItem Protocol
 public typealias NavItem = HTML.View

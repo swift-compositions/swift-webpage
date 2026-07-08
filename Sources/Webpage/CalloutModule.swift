@@ -1,4 +1,4 @@
-import HTMLComponents
+import HTML
 
 public struct CallToActionModule<Content: HTML.View>: HTML.View {
 
@@ -22,42 +22,43 @@ public struct CallToActionModule<Content: HTML.View>: HTML.View {
                 HTML.Group {
                     div {
                         Header(2) { HTML.Raw(title.content) }
-                            .color(title.color)
+                            .css.color(title.color)
                     }
 
                     if let blurb {
                         div {
                             Paragraph(.big) { HTML.Raw(blurb.content) }
+                                .css
                                 .font(.body(.regular))
                                 .color(blurb.color)
-                                .margin(
-                                    vertical: .zero,
-                                    horizontal: .auto,
-                                    media: .desktop
-                                )
+                                .desktop {
+                                    $0.margin(vertical: .zero, horizontal: .auto)
+                                }
                                 .maxWidth(.rem(40))
                         }
                     }
                     content
                 }
-                .textAlign(.center, media: .desktop)
+                .css.desktop { $0.textAlign(.center) }
             }
+            .css
             .margin(vertical: .zero, horizontal: .auto)
             .maxWidth(.px(1280))
             .padding(
-                vertical: .large,
-                horizontal: .medium
+                vertical: .rem(3),
+                horizontal: .rem(1.5)
             )
-            .padding(
-                .extraLarge,
-                media: .desktop
-            )
+            .desktop {
+                $0.padding(.rem(6))
+            }
             .flexContainer(
                 direction: .column,
                 wrap: .wrap,
                 rowGap: .rem(0.5)
             )
-            .alignItems(.center, media: .desktop)
+            .desktop {
+                $0.alignItems(.center)
+            }
         }
     }
 }
@@ -70,13 +71,13 @@ public struct CallToActionModule<Content: HTML.View>: HTML.View {
                 title: (content: "HELLO THERE", color: .black),
                 blurb: (content: "HELLO", color: .blue)
             )
-            .border(.left, width: .px(3), style: .solid)
+            .css.border(.left, width: .px(3), style: .solid)
 
             CallToActionModule(
                 title: (content: "HELLO THERE", color: .black),
                 blurb: (content: "HELLO", color: .blue)
             )
-            .border(.left, width: .px(3), style: .solid)
+            .css.border(.left, width: .px(3), style: .solid)
         }
 
         .frame(width: 600, height: 400)

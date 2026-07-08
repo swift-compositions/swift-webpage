@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 01/09/2024.
 //
 
-import Dependencies
+public import Dependencies
 import Foundation
 import HTML
 
@@ -112,12 +112,12 @@ extension HTML.View {
 }
 
 // Unsure whether this should be added.
-private enum ObjectStyleKey: DependencyKey {
+private enum ObjectStyleKey: Dependency.Key {
     static let liveValue = ObjectStyle(position: .inherit)
     static let testValue = ObjectStyle(position: .inherit)
 }
 
-extension DependencyValues {
+extension Dependency.Values {
     public var objectStyle: ObjectStyle {
         get { self[ObjectStyleKey.self] }
         set { self[ObjectStyleKey.self] = newValue }

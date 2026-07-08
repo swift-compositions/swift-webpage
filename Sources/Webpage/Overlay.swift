@@ -7,7 +7,7 @@
 
 import Dependencies
 import Foundation
-import HTMLComponents
+import HTML
 
 public struct Overlay<Content: HTML.View>: HTML.View {
 

@@ -5,10 +5,8 @@
 //  Created by Coen ten Thije Boonkkamp on 14/07/2025.
 //
 
-import Dependencies
 import Foundation
 import HTML
-import HTMLComponents
 
 // MARK: - Updated Button Struct
 public struct Button<Label: HTML.View, Icon: HTML.View>: HTML.View {
@@ -40,8 +38,8 @@ public struct Button<Label: HTML.View, Icon: HTML.View>: HTML.View {
         self.style = style
     }
 
-    @Dependency(\.theme.text.button) var textColor
-    @Dependency(\.theme.background.button) var background
+    var textColor: HTMLColor { HTMLColor.theme.text.button }
+    var background: HTMLColor { HTMLColor.theme.background.button }
 
     public var body: some HTML.View {
         return HTML_Standard.Button {

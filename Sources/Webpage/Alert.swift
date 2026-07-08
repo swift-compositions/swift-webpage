@@ -1,5 +1,4 @@
 import HTML
-import HTMLComponents
 
 // MARK: - Alert Component
 public struct Alert<Content: HTML.View, Actions: HTML.View>: HTML.View {
@@ -75,10 +74,12 @@ public struct Alert<Content: HTML.View, Actions: HTML.View>: HTML.View {
                 // Icon
                 if let icon = icon {
                     span { icon }
+                        .css
                         .fontSize(.rem(1.25))
                         .marginRight(.rem(0.75))
                 } else {
                     span { severity.defaultIcon }
+                        .css
                         .fontSize(.rem(1.25))
                         .marginRight(.rem(0.75))
                 }
@@ -87,12 +88,14 @@ public struct Alert<Content: HTML.View, Actions: HTML.View>: HTML.View {
                 div {
                     if let title = title {
                         div { HTML.Text(title) }
+                            .css
                             .fontWeight(.semiBold)
                             .marginBottom(.rem(0.25))
                     }
 
                     content
                 }
+                .css
                 .flexGrow()
 
                 // Actions
@@ -100,6 +103,7 @@ public struct Alert<Content: HTML.View, Actions: HTML.View>: HTML.View {
                     div {
                         actions
                     }
+                    .css
                     .display(.flex)
                     .gap(.rem(0.5))
                     .marginLeft(.rem(1))
@@ -110,6 +114,7 @@ public struct Alert<Content: HTML.View, Actions: HTML.View>: HTML.View {
                     button {
                         "×"
                     }
+                    .css
                     .fontSize(.rem(1.5))
                     .lineHeight(1)
                     .padding(.rem(0.25))
@@ -121,10 +126,12 @@ public struct Alert<Content: HTML.View, Actions: HTML.View>: HTML.View {
                     .attribute("onclick", "this.closest('.alert').remove()")
                 }
             }
+            .css
             .display(.flex)
             .alignItems(.flexStart)
         }
         .class("alert")
+        .css
         .padding(.rem(1))
         .backgroundColor(severity.backgroundColor)
         .border(width: .px(1), style: .solid, color: severity.borderColor)
@@ -181,11 +188,13 @@ public struct Banner<Content: HTML.View, Actions: HTML.View>: HTML.View {
                     div {
                         actions
                     }
+                    .css
                     .display(.flex)
                     .gap(.rem(1))
                     .marginLeft(.auto)
                 }
             }
+            .css
             .display(.flex)
             .alignItems(.center)
             .justifyContent(.spaceBetween)
@@ -193,11 +202,13 @@ public struct Banner<Content: HTML.View, Actions: HTML.View>: HTML.View {
             .margin(.auto)
             .padding(horizontal: style.padding)
         }
+        .css
         .padding(vertical: style.padding)
         .backgroundColor(backgroundColor)
         .color(textColor)
         .if(sticky) { banner in
             banner
+                .css
                 .position(.sticky)
                 .top(.px(0))
                 .zIndex(100)

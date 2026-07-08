@@ -1,5 +1,5 @@
 import Foundation
-import HTMLComponents
+import HTML
 
 public struct PageModule<Title: HTML.View, Content: HTML.View>: HTML.View {
     let title: Title?
@@ -82,7 +82,7 @@ public struct PageModuleSeeAllTitle<Title: HTML.View>: HTML.View {
     public init(
         title: String,
         seeAllURL: String
-    ) where Title == HTMLComponents.Header<HTML.Text> {
+    ) where Title == Header<HTML.Text> {
         self.title = Header(3) { HTML.Text(title) }
         self.seeAllURL = seeAllURL
     }

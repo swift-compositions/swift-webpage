@@ -6,8 +6,7 @@
 //
 
 @_exported import HTML
-@_exported import HTMLComponents
-@_exported import HTMLTheme
+@_exported import CSS_Theming
 
 #if TRANSLATING
 @_exported import Translating
