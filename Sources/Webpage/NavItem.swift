@@ -39,8 +39,8 @@ public struct NavLink: HTML.View {
         .css
         .fontWeight(isActive ? .semiBold : nil)
         .color(isActive ? .text.link : .text.tertiary)
-        .visited { $0.color(HTMLColor.text.link) }
-        .pseudo(.link) { $0.color(HTMLColor.text.link) }
+        .visited { $0.color(DarkModeColor.text.link) }
+        .pseudo(.link) { $0.color(DarkModeColor.text.link) }
         .visited { $0.textDecoration(TextDecoration.none) }
         .pseudo(.link) { $0.textDecoration(TextDecoration.none) }
         .hover { $0.textDecoration(TextDecoration.underline) }
@@ -55,7 +55,7 @@ public struct NavButton: HTML.View {
         case danger
         case success
 
-        var backgroundColor: HTMLColor {
+        var backgroundColor: DarkModeColor {
             switch self {
             case .primary: return .blue
             case .secondary: return .gray
@@ -64,14 +64,14 @@ public struct NavButton: HTML.View {
             }
         }
 
-        var textColor: HTMLColor {
+        var textColor: DarkModeColor {
             switch self {
             case .primary, .danger, .success: return .white
             case .secondary: return .text.primary
             }
         }
 
-        var borderColor: HTMLColor? {
+        var borderColor: DarkModeColor? {
             switch self {
             case .secondary: return .border.secondary
             default: return nil

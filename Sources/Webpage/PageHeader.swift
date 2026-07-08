@@ -69,10 +69,10 @@ public struct PageHeader<Title: HTML.View, Blurb: HTML.View, CallToAction: HTML.
 }
 
 public struct PageHeaderGradient {
-    let bottom: HTMLColor
-    let top: HTMLColor
+    let bottom: DarkModeColor
+    let top: DarkModeColor
 
-    public init(bottom: HTMLColor, top: HTMLColor) {
+    public init(bottom: DarkModeColor, top: DarkModeColor) {
         self.bottom = bottom
         self.top = top
     }

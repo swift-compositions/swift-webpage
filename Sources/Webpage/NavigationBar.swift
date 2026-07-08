@@ -10,13 +10,13 @@ import HTML
 
 public struct NavigationBar: HTML.View {
     let logo: any HTML.View
-    let backgroundColor: HTMLColor?
+    let backgroundColor: DarkModeColor?
     let sticky: Bool
     let items: [any NavItem]
 
     public init(
         sticky: Bool = false,
-        backgroundColor: HTMLColor? = nil,
+        backgroundColor: DarkModeColor? = nil,
         @HTML.Builder logo: () -> any HTML.View,
         @Array<any NavItem>.Builder items: () -> [any NavItem]
     ) {

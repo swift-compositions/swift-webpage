@@ -8,7 +8,7 @@ public struct Alert<Content: HTML.View, Actions: HTML.View>: HTML.View {
         case warning
         case error
 
-        var backgroundColor: HTMLColor {
+        var backgroundColor: DarkModeColor {
             switch self {
             case .info: return .blue.opacity(0.1)
             case .success: return .green.opacity(0.1)
@@ -17,7 +17,7 @@ public struct Alert<Content: HTML.View, Actions: HTML.View>: HTML.View {
             }
         }
 
-        var borderColor: HTMLColor {
+        var borderColor: DarkModeColor {
             switch self {
             case .info: return .blue.opacity(0.3)
             case .success: return .green.opacity(0.3)
@@ -26,7 +26,7 @@ public struct Alert<Content: HTML.View, Actions: HTML.View>: HTML.View {
             }
         }
 
-        var textColor: HTMLColor {
+        var textColor: DarkModeColor {
             switch self {
             case .info: return .blue
             case .success: return .green
@@ -52,13 +52,17 @@ public struct Alert<Content: HTML.View, Actions: HTML.View>: HTML.View {
     let content: Content
     let actions: Actions
 
+    // No default for `actions:` — `extension Alert where Actions == HTML.Empty`
+    // below already supplies it. A default expression here would additionally be
+    // used to infer `Actions`, which Swift rejects (a hard error in a future
+    // language mode) because `Actions` is already inferrable from the signature.
     public init(
         severity: Severity = .info,
         title: String? = nil,
         icon: String? = nil,
         dismissible: Bool = false,
         @HTML.Builder content: () -> Content,
-        @HTML.Builder actions: () -> Actions = { HTML.Empty() }
+        @HTML.Builder actions: () -> Actions
     ) {
         self.severity = severity
         self.title = title
@@ -157,19 +161,21 @@ public struct Banner<Content: HTML.View, Actions: HTML.View>: HTML.View {
     }
 
     let style: Style
-    let backgroundColor: HTMLColor
-    let textColor: HTMLColor
+    let backgroundColor: DarkModeColor
+    let textColor: DarkModeColor
     let sticky: Bool
     let content: Content
     let actions: Actions
 
+    // No default for `actions:` — see the note on `Alert.init`; the
+    // `extension Banner where Actions == HTML.Empty` convenience init supplies it.
     public init(
         style: Style = .standard,
-        backgroundColor: HTMLColor = .blue,
-        textColor: HTMLColor = .white,
+        backgroundColor: DarkModeColor = .blue,
+        textColor: DarkModeColor = .white,
         sticky: Bool = false,
         @HTML.Builder content: () -> Content,
-        @HTML.Builder actions: () -> Actions = { HTML.Empty() }
+        @HTML.Builder actions: () -> Actions
     ) {
         self.style = style
         self.backgroundColor = backgroundColor
@@ -239,8 +245,8 @@ extension Alert where Actions == HTML.Empty {
 extension Banner where Actions == HTML.Empty {
     public init(
         style: Style = .standard,
-        backgroundColor: HTMLColor = .blue,
-        textColor: HTMLColor = .white,
+        backgroundColor: DarkModeColor = .blue,
+        textColor: DarkModeColor = .white,
         sticky: Bool = false,
         @HTML.Builder content: () -> Content
     ) {

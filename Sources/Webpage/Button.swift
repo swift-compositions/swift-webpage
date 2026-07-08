@@ -38,8 +38,8 @@ public struct Button<Title: HTML.View, Icon: HTML.View>: HTML.View {
         self.style = style
     }
 
-    var textColor: HTMLColor { HTMLColor.theme.text.button }
-    var background: HTMLColor { HTMLColor.theme.background.button }
+    var textColor: DarkModeColor { DarkModeColor.theme.text.button }
+    var background: DarkModeColor { DarkModeColor.theme.background.button }
 
     public var body: some HTML.View {
         return HTML_Standard.Button {
@@ -122,11 +122,11 @@ public struct ButtonStyle: Equatable {
 // MARK: - HTML Protocol Extension
 extension HTML.View {
     public func buttonStyle(
-        background: HTMLColor,
+        background: DarkModeColor,
         style: ButtonStyle = .default
     ) -> some HTML.View {
 
-        //        let borderColor: HTMLColor? = {
+        //        let borderColor: DarkModeColor? = {
         //            switch style {
         //            case .primary, .secondary, .tertiary:
         //                return background.darker(by: 0.15)
@@ -148,7 +148,7 @@ extension HTML.View {
             }
         }()
 
-        let backgroundColor: HTMLColor? = {
+        let backgroundColor: DarkModeColor? = {
             switch style {
             case .primary, .secondary, .tertiary:
                 return background
@@ -159,12 +159,12 @@ extension HTML.View {
             }
         }()
 
-        let backgroundColorHover: HTMLColor? = {
+        let backgroundColorHover: DarkModeColor? = {
             switch style {
             case .primary, .secondary, .tertiary:
                 return background.darker(by: 0.2)
             case .round:
-                return HTMLColor.buttonBackground
+                return DarkModeColor.buttonBackground
             default:
                 return nil
             }

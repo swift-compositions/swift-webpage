@@ -2,13 +2,13 @@ import HTML
 
 public struct CallToActionModule<Content: HTML.View>: HTML.View {
 
-    let title: (content: String, color: HTMLColor)
-    let blurb: (content: String, color: HTMLColor)?
+    let title: (content: String, color: DarkModeColor)
+    let blurb: (content: String, color: DarkModeColor)?
     let content: Content
 
     public init(
-        title: (content: String, color: HTMLColor),
-        blurb: (content: String, color: HTMLColor)?,
+        title: (content: String, color: DarkModeColor),
+        blurb: (content: String, color: DarkModeColor)?,
         @HTML.Builder content: () -> Content = { HTML.Empty() }
     ) {
         self.title = title

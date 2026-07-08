@@ -31,7 +31,7 @@ public struct Overlay<Content: HTML.View>: HTML.View {
             .left(.zero)
             .width(.percent(100))
             .height(.percent(100))
-            .backgroundColor(HTMLColor(light: .rgba(red: 0, green: 0, blue: 0, alpha: 0.7)))
+            .backgroundColor(DarkModeColor(light: .rgba(red: 0, green: 0, blue: 0, alpha: 0.7)))
             .inlineStyle("transition", "opacity 0.3s ease")
             .opacity(0)
             .zIndex(1000)

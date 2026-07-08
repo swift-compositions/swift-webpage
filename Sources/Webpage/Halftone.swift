@@ -12,7 +12,7 @@ import HTML
 public struct Halftone<Image: HTML.View>: HTML.View {
     let grayscale: String
     let dotSize: W3C_CSS_Values.Length
-    let lineColor: HTMLColor
+    let lineColor: DarkModeColor
     let lineContrast: Int
     let photoBrightness: Int
     let photoContrast: Int
@@ -80,7 +80,7 @@ extension HTML.View {
     public func halftone(
         grayscale: String = "0",
         dotSize: W3C_CSS_Values.Length = .em(0.3),
-        lineColor: HTMLColor = .offBlack.withDarkColor(.offWhite),
+        lineColor: DarkModeColor = .offBlack.withDarkColor(.offWhite),
         lineContrast: Int = 2000,
         photoBrightness: Int = 100,
         photoContrast: Int = 100,

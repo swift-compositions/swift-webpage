@@ -49,12 +49,12 @@ public struct _ModernHead<CustomHead: HTML.View>: HTML.View {
                 """
 
                 body, html {
-                    background: \(HTMLColor.theme.background.primary.light.description);
+                    background: \(DarkModeColor.theme.background.primary.light.description);
                 }
 
                 @media (prefers-color-scheme: dark) {
                     body, html {
-                        background: \(HTMLColor.theme.background.primary.dark.description);
+                        background: \(DarkModeColor.theme.background.primary.dark.description);
                     }
                 }
 

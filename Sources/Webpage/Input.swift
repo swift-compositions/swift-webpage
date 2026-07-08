@@ -93,7 +93,7 @@ extension Input {
                     .css
                     .padding(vertical: .px(14), horizontal: .px(10))
                     .border(width: .px(1), color: .red500.withDarkColor(.red400))
-                    .backgroundColor(HTMLColor.red100.withDarkColor(.red900))
+                    .backgroundColor(DarkModeColor.red100.withDarkColor(.red900))
                     .color(.text.primary)
                     .borderRadius(.px(5))
 
