@@ -1,4 +1,5 @@
 import HTML
+@_spi(DynamicHTML) import HTML_Rendering_Core
 
 public struct Header<Content: HTML.View>: HTML.View {
     let size: Int
@@ -31,7 +32,7 @@ public struct Header<Content: HTML.View>: HTML.View {
             .lineHeight(lineHeight)
     }
 
-    var fontSize: FontSize {
+    var fontSize: W3C_CSS_Fonts.FontSize {
         switch size {
         case 1: .em(2)
         case 2: .em(1.5)

@@ -14,31 +14,36 @@ public typealias NavItem = HTML.View
 
 // MARK: - NavLink
 public struct NavLink: HTML.View {
-    let title: any HTML.View
+    // `HTML.View` refines the move-only `Render.View` and carries a recursive
+    // `Body: HTML.View` constraint, so `any HTML.View` cannot self-conform. The
+    // ecosystem composes through the concrete `HTML.AnyView` eraser plus generics
+    // (see the type comment on `HTML.AnyView`). Erase once, at construction.
+    let title: HTML.AnyView
     let href: Href
     let isActive: Bool
 
-    public init(
-        _ title: any HTML.View,
+    public init<Title: HTML.View>(
+        _ title: Title,
         href: Href,
         isActive: Bool
     ) {
-        self.title = title
+        self.title = HTML.AnyView(title)
         self.href = href
         self.isActive = isActive
     }
 
     public var body: some HTML.View {
         a(href: href) {
-            HTML.AnyView(title)
+            title
         }
+        .css
         .fontWeight(isActive ? .semiBold : nil)
         .color(isActive ? .text.link : .text.tertiary)
-        .color(HTMLColor.text.link, pseudo: .visited)
-        .color(HTMLColor.text.link, pseudo: .link)
-        .textDecoration(TextDecoration.none, pseudo: .visited)
-        .textDecoration(TextDecoration.none, pseudo: .link)
-        .textDecoration(TextDecoration.underline, pseudo: .hover)
+        .visited { $0.color(HTMLColor.text.link) }
+        .pseudo(.link) { $0.color(HTMLColor.text.link) }
+        .visited { $0.textDecoration(TextDecoration.none) }
+        .pseudo(.link) { $0.textDecoration(TextDecoration.none) }
+        .hover { $0.textDecoration(TextDecoration.underline) }
     }
 }
 
@@ -92,6 +97,7 @@ public struct NavButton: HTML.View {
         a(href: href) {
             title
         }
+        .css
         .padding(vertical: .rem(0.5), horizontal: .rem(1))
         .backgroundColor(style.backgroundColor)
         .color(style.textColor)
@@ -105,9 +111,13 @@ public struct NavButton: HTML.View {
                 color: style.borderColor!
             )
         }
+        .css
         .inlineStyle("transition", "all 0.2s")
-        .opacity(0.9, pseudo: .hover)
-        .transform("translateY(-1px)", pseudo: .hover)
+        .hover {
+            $0
+                .opacity(0.9)
+                .transform(.translateY(.px(-1)))
+        }
     }
 }
 
@@ -117,6 +127,7 @@ public struct NavDivider: HTML.View {
 
     public var body: some HTML.View {
         span {}
+            .css
             .width(.px(1))
             .height(.rem(1.5))
             .backgroundColor(.border.secondary)
@@ -143,9 +154,11 @@ public struct NavDropdown<Items: HTML.View>: HTML.View {
             button {
                 title
                 span { "▼" }
+                    .css
                     .marginLeft(.rem(0.25))
                     .fontSize(.rem(0.75))
             }
+            .css
             .backgroundColor(.transparent)
             .border(.hidden)
             .color(.text.primary)
@@ -157,7 +170,8 @@ public struct NavDropdown<Items: HTML.View>: HTML.View {
                 items
             }
             .class("dropdown-menu")
-            .display(.block, selector: ":hover .dropdown-menu")
+            .css
+            .selector(":hover .dropdown-menu") { $0.display(.block) }
             .display(Display.none)
             .position(.absolute)
             .top(.percent(100))
@@ -171,6 +185,7 @@ public struct NavDropdown<Items: HTML.View>: HTML.View {
             .inlineStyle("box-shadow", "0 4px 6px rgba(0, 0, 0, 0.1)")
         }
         .class("dropdown")
+        .css
         .position(.relative)
     }
 }
@@ -181,19 +196,20 @@ public struct NavSpacer: HTML.View {
 
     public var body: some HTML.View {
         div {}
+            .css
             .flexGrow(1)  // Takes up all available space between items
-            .display(.block, media: .desktop)
-            .display(Display.none, media: .mobile)  // Hide on mobile
+            .desktop { $0.display(.block) }
+            .mobile { $0.display(Display.none) }  // Hide on mobile
     }
 }
 
 // MARK: - NavGroup
 public struct NavGroup<Items: HTML.View>: HTML.View {
     let items: Items
-    let spacing: Length
+    let spacing: W3C_CSS_Values.Length
 
     public init(
-        spacing: Length = .rem(1),
+        spacing: W3C_CSS_Values.Length = .rem(1),
         @HTML.Builder items: () -> Items
     ) {
         self.items = items()
@@ -204,6 +220,7 @@ public struct NavGroup<Items: HTML.View>: HTML.View {
         div {
             items
         }
+        .css
         .display(.flex)
         .alignItems(.center)
         .gap(.length(spacing))

@@ -5,7 +5,6 @@
 //  Created by Coen ten Thije Boonkkamp on 31/08/2024.
 //
 
-import Dependencies
 import Foundation
 import HTML
 
@@ -25,6 +24,7 @@ public struct Overlay<Content: HTML.View>: HTML.View {
     private var backgroundOverlay: some HTML.View {
         div {}
             .id("background-overlay-\(id)")
+            .css
             .display(Display.none)
             .position(.fixed)
             .top(.zero)
@@ -32,7 +32,7 @@ public struct Overlay<Content: HTML.View>: HTML.View {
             .width(.percent(100))
             .height(.percent(100))
             .backgroundColor(HTMLColor(light: .rgba(red: 0, green: 0, blue: 0, alpha: 0.7)))
-            .transition("opacity 0.3s ease")
+            .inlineStyle("transition", "opacity 0.3s ease")
             .opacity(0)
             .zIndex(1000)
     }
@@ -45,21 +45,25 @@ public struct Overlay<Content: HTML.View>: HTML.View {
                 content
             }
             .id("popup-container-\(id)")
+            .css
             .textAlign(.center)
             .display(Display.none)
             .position(.fixed)
             .top(.percent(50))
             .left(.percent(50))
-            .transform("translate(-50%, -50%) scale(0.95)")
-            .transition("opacity 0.3s ease, transform 0.3s ease")
+            .transform(
+                .compound([
+                    .translate(.percent(-50), .percent(-50)),
+                    .scale(sx: 0.95)
+                ])
+            )
+            .inlineStyle("transition", "opacity 0.3s ease, transform 0.3s ease")
             .opacity(0)
             .zIndex(1001)
             .maxWidth(.px(440))
             .width(.percent(90))
-            .margin(
-                vertical: nil,
-                horizontal: .auto
-            )
+            .marginRight(.auto)
+            .marginLeft(.auto)
             .backgroundColor(.background.primary)
         }
         .class(.init(id))

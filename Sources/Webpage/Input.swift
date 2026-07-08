@@ -53,6 +53,7 @@ extension Input {
             switch self {
             case .default:
                 html
+                    .css
                     .padding(vertical: .px(14), horizontal: .px(10))
                     .border(width: .px(1), color: .gray900.withDarkColor(.gray100))
                     .backgroundColor(.white.withDarkColor(.black))
@@ -61,6 +62,7 @@ extension Input {
 
             case .outlined:
                 html
+                    .css
                     .padding(vertical: .px(14), horizontal: .px(10))
                     .border(width: .px(2), color: .blue500.withDarkColor(.blue400))
                     .backgroundColor(.transparent)
@@ -69,6 +71,7 @@ extension Input {
 
             case .filled:
                 html
+                    .css
                     .padding(vertical: .px(14), horizontal: .px(10))
                     .border(.hidden)
                     .backgroundColor(.gray100.withDarkColor(.gray800))
@@ -77,6 +80,7 @@ extension Input {
 
             case .minimal:
                 html
+                    .css
                     .padding(vertical: .px(8), horizontal: .px(4))
                     .border(.hidden)
                     .backgroundColor(.transparent)
@@ -86,14 +90,16 @@ extension Input {
 
             case .error:
                 html
+                    .css
                     .padding(vertical: .px(14), horizontal: .px(10))
                     .border(width: .px(1), color: .red500.withDarkColor(.red400))
-                    .backgroundColor(Color.red100.withDarkColor(.red900))
+                    .backgroundColor(HTMLColor.red100.withDarkColor(.red900))
                     .color(.text.primary)
                     .borderRadius(.px(5))
 
             case .success:
                 html
+                    .css
                     .padding(vertical: .px(14), horizontal: .px(10))
                     .border(width: .px(1), color: .green500.withDarkColor(.green400))
                     .backgroundColor(.green100.withDarkColor(.green900))

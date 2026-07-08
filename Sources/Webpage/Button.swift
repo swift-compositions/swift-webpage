@@ -9,16 +9,16 @@ import Foundation
 import HTML
 
 // MARK: - Updated Button Struct
-public struct Button<Label: HTML.View, Icon: HTML.View>: HTML.View {
+public struct Button<Title: HTML.View, Icon: HTML.View>: HTML.View {
     let button: HTML_Standard.Button
-    let label: Label
+    let label: Title
     let icon: Icon?
     let style: ButtonStyle
 
     public init(
         button: HTML_Standard.Button = .init(),
         style: ButtonStyle = .default,
-        @HTML.Builder label: () -> Label,
+        @HTML.Builder label: () -> Title,
         @HTML.Builder icon: () -> Icon
     ) {
         self.button = button
@@ -30,7 +30,7 @@ public struct Button<Label: HTML.View, Icon: HTML.View>: HTML.View {
     public init(
         button: HTML_Standard.Button = .init(),
         style: ButtonStyle = .default,
-        @HTML.Builder label: () -> Label
+        @HTML.Builder label: () -> Title
     ) where Icon == HTML.Empty {
         self.button = button
         self.icon = HTML.Empty()
@@ -45,15 +45,18 @@ public struct Button<Label: HTML.View, Icon: HTML.View>: HTML.View {
         return HTML_Standard.Button {
             HTML.Group {
                 if let icon = icon {
-                    LabelTypealias {
+                    Label {
                         span { icon }
+                            .css
                             .color(textColor)
                     } title: {
                         span { label }
+                            .css
                             .color(textColor)
                     }
                 } else {
                     span { label }
+                        .css
                         .color(textColor)
                 }
             }
@@ -193,6 +196,7 @@ extension HTML.View {
 
         return
             self
+            .css
             //            .color(color)
             .padding(
                 vertical: style.verticalPadding,
@@ -202,13 +206,23 @@ extension HTML.View {
             .borderStyle(borderStyle)
             .borderWidth(.px(0))
             .appearance(Appearance.none)
-            .backgroundColor(backgroundColor)
-            .backgroundColor(backgroundColorHover, pseudo: .hover)
+            .if(let: backgroundColor) { view, color in
+                view.backgroundColor(color)
+            }
+            .css
+            .hover { view in
+                view.if(let: backgroundColorHover) { hovered, color in
+                    hovered.backgroundColor(color)
+                }
+            }
             .display(.flex)
             .alignItems(.center)
             .width(.fitContent)
-            .width(.fitContent, media: .mobile)
-            .alignSelf(.start, media: .mobile)
+            .mobile {
+                $0
+                    .width(.fitContent)
+                    .alignSelf(.start)
+            }
             .textDecoration(TextDecoration.none)
             .cursor(.pointer)
             .inlineStyle("transition", "background-color 0.3s, box-shadow 0.3s")
@@ -221,7 +235,9 @@ extension HTML.View {
                 "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)"
             )
             .inlineStyle("box-shadow", boxShadow)
-            .inlineStyle("box-shadow", boxShadowDark, media: .dark)
+            .dark {
+                $0.inlineStyle("box-shadow", boxShadowDark)
+            }
 
     }
 }

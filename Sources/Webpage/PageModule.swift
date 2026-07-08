@@ -43,6 +43,7 @@ public struct PageModule<Title: HTML.View, Content: HTML.View>: HTML.View {
             }
             content
         }
+        .css
         .flexContainer(
             direction: .column,
             wrap: .wrap,
@@ -50,19 +51,27 @@ public struct PageModule<Title: HTML.View, Content: HTML.View>: HTML.View {
             itemAlignment: theme.itemAlignment
         )
         .maxWidth(.px(1280))
-        .margin(vertical: 0, horizontal: .auto, media: .desktop)
-        .padding(
-            top: theme.topMargin,
-            horizontal: theme.leftRightMargin,
-            bottom: theme.bottomMargin,
-            media: .mobile
-        )
-        .padding(
-            top: theme.topMarginDesktop,
-            horizontal: .zero,
-            bottom: theme.bottomMargin,
-            media: .desktop
-        )
+        .desktop {
+            $0
+                .marginTop(.zero)
+                .marginBottom(.zero)
+                .marginLeft(.auto)
+                .marginRight(.auto)
+        }
+        .mobile {
+            $0.padding(
+                top: theme.topMargin,
+                horizontal: theme.leftRightMargin,
+                bottom: theme.bottomMargin
+            )
+        }
+        .desktop {
+            $0.padding(
+                top: theme.topMarginDesktop,
+                horizontal: .zero,
+                bottom: theme.bottomMargin
+            )
+        }
     }
 }
 
@@ -97,6 +106,7 @@ public struct PageModuleSeeAllTitle<Title: HTML.View>: HTML.View {
             }
 
         }
+        .css
         .width(.percent(100))
         .flexContainer(
             direction: .row,

@@ -5,6 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 03/09/2024.
 //
 
+import Foundation
 import INCITS_4_1986
 
 extension String {
@@ -12,7 +13,7 @@ extension String {
         // Filter to alphanumeric and underscore characters only
         let sanitized = input.unicodeScalars.filter { scalar in
             scalar.value < 128 && (
-                INCITS_4_1986.CharacterClassification.isAlphanumeric(UInt8(scalar.value)) ||
+                INCITS_4_1986.Classification.isAlphanumeric(UInt8(scalar.value)) ||
                 scalar == "_"
             )
         }

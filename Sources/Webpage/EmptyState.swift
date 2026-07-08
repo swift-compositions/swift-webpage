@@ -26,7 +26,7 @@ public struct EmptyState<Action: HTML.View>: HTML.View {
     let textAlign: TextAlign
 
     /// Optional custom spacing between elements
-    let spacing: Length?
+    let spacing: W3C_CSS_Values.Length?
 
     /// Optional icon size
     let iconSize: LengthPercentage?
@@ -36,7 +36,7 @@ public struct EmptyState<Action: HTML.View>: HTML.View {
         title: String,
         description: String? = nil,
         textAlign: TextAlign = .center,
-        spacing: Length? = nil,
+        spacing: W3C_CSS_Values.Length? = nil,
         iconSize: LengthPercentage? = nil,
         @HTML.Builder action: () -> Action
     ) {
@@ -55,12 +55,14 @@ public struct EmptyState<Action: HTML.View>: HTML.View {
                 // Icon
                 if let icon = icon {
                     div { icon }
-                        .fontSize(.init(iconSize ?? .rem(3)))
+                        .css
+                        .fontSize(.lengthPercentage(iconSize ?? .rem(3)))
                         .marginBottom(.rem(0.5))
                 }
 
                 // Title
                 Header(2) { title }
+                    .css
                     .fontSize(.rem(1.5))
                     .color(.text.primary)
                     .marginBottom(.rem(0.5))
@@ -68,19 +70,23 @@ public struct EmptyState<Action: HTML.View>: HTML.View {
                 // Description
                 if let description = description {
                     Paragraph { description }
+                        .css
                         .color(.text.secondary)
                         .maxWidth(.rem(30))
-                        .margin(horizontal: .auto)
+                        .marginRight(.auto)
+                        .marginLeft(.auto)
                         .marginBottom(.rem(1))
                 }
 
                 // Action
                 if let action = action {
                     div { action }
+                        .css
                         .marginTop(.rem(1))
                 }
             }
         }
+        .css
         .textAlign(textAlign)
         .padding(vertical: .rem(3), horizontal: .rem(2))
     }
@@ -95,7 +101,7 @@ extension EmptyState where Action == HTML.Empty {
         title: String,
         description: String? = nil,
         textAlign: TextAlign = .center,
-        spacing: Length? = nil,
+        spacing: W3C_CSS_Values.Length? = nil,
         iconSize: LengthPercentage? = nil
     ) {
         self.icon = icon

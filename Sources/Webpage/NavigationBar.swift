@@ -5,7 +5,6 @@
 //  Created by Coen ten Thije Boonkkamp on 14/08/2024.
 //
 
-import Dependencies
 import Foundation
 import HTML
 
@@ -19,7 +18,7 @@ public struct NavigationBar: HTML.View {
         sticky: Bool = false,
         backgroundColor: HTMLColor? = nil,
         @HTML.Builder logo: () -> any HTML.View,
-        @ArrayBuilder<NavItem> items: () -> [any NavItem]
+        @Array<any NavItem>.Builder items: () -> [any NavItem]
     ) {
         self.logo = logo()
         self.items = items()
@@ -91,10 +90,12 @@ public struct NavigationBar: HTML.View {
                 // Checkbox inside container for sibling selector to work
                 input.checkbox
                     .id("menu-checkbox")
+                    .css
                     .display(Display.none)
 
                 // Logo
                 HTML.AnyView(logo)
+                    .css
                     .lineHeight(0)
 
                 // Desktop navigation items
@@ -116,46 +117,59 @@ public struct NavigationBar: HTML.View {
                             div {
                                 HTML.AnyView(item)
                             }
+                            .css
                             .padding(.rem(1))
                             .borderBottom(width: .px(1), style: .solid, color: .border.tertiary)
                         }
                     }
                 }
                 .class("mobile-menu")
+                .css
                 .flexBasis(.percent(100))  // Forces full width = new line
                 .borderTop(width: .px(1), style: .solid, color: .border.secondary)
                 //                .backgroundColor(backgroundColor)
                 .marginTop(.rem(1))
             }
+            .css
             .display(.flex)
             .flexDirection(.row)
             .flexWrap(.wrap)  // Allow wrapping for mobile menu
             .alignItems(.center)
             .gap(.rem(1))  // Space between all flex items
-            .padding(
-                top: .extraSmall,
-                bottom: .small,
-                left: .zero,
-                right: .zero,
-                media: .desktop
-            )
-            .padding(
-                top: .small,
-                bottom: .small,
-                left: .medium,
-                right: .medium,
-                media: .mobile
-            )
+            .desktop {
+                $0.padding(
+                    top: .extraSmall,
+                    right: .zero,
+                    bottom: .small,
+                    left: .zero
+                )
+            }
+            .mobile {
+                $0.padding(
+                    top: .small,
+                    right: .medium,
+                    bottom: .small,
+                    left: .medium
+                )
+            }
             .maxWidth(.px(1280))
-            .margin(vertical: .zero, horizontal: .auto)
+            .marginTop(.zero)
+            .marginBottom(.zero)
+            .marginLeft(.auto)
+            .marginRight(.auto)
         }
+        .css
         .width(.percent(100))
         .if(sticky) { nav in
-            nav.position(.sticky)
+            nav
+                .css
+                .position(.sticky)
                 .top(.zero)
                 .zIndex(9999)
         }
-        .backgroundColor(backgroundColor)
+        .if(let: backgroundColor) { nav, color in
+            nav.css.backgroundColor(color)
+        }
     }
 
     struct MenuButtonLabel: HTML.View {
@@ -163,9 +177,12 @@ public struct NavigationBar: HTML.View {
             Bars()
                 .id("menu-icon")
                 .attribute("for", "menu-checkbox")
+                .css
                 .cursor(.pointer)
                 .marginLeft(.auto)  // Push to right side
-                .display(Display.none, media: .desktop)
+                .desktop {
+                    $0.display(Display.none)
+                }
                 .userSelect(UserSelect.none)
         }
 
@@ -175,6 +192,7 @@ public struct NavigationBar: HTML.View {
                     HTMLForEach(-1...1) { index in
                         Bar(index: index)
                     }
+                    .css
                     .width(.px(24))
                     .height(.px(3))
                     .backgroundColor(.background.button)
@@ -190,22 +208,23 @@ public struct NavigationBar: HTML.View {
             let index: Int
             var body: some HTML.View {
                 span {}
+                    .css
                     .inlineStyle("top", index == 0 ? nil : "\(index * 5)px")
-                    .inlineStyle(
-                        "top",
-                        index == 0 ? nil : index == 1 ? "-5px" : "0",
-                        selector: "input:checked ~ #menu-icon"
-                    )
-                    .inlineStyle(
-                        "transform",
-                        "rotate(\(index * 45)deg)",
-                        selector: "input:checked ~ #menu-icon"
-                    )
-                    .inlineStyle(
-                        "background",
-                        index == 0 ? "transparent" : nil,
-                        selector: "input:checked ~ #menu-icon"
-                    )
+                    .selector("input:checked ~ #menu-icon") {
+                        $0
+                            .inlineStyle(
+                                "top",
+                                index == 0 ? nil : index == 1 ? "-5px" : "0"
+                            )
+                            .inlineStyle(
+                                "transform",
+                                "rotate(\(index * 45)deg)"
+                            )
+                            .inlineStyle(
+                                "background",
+                                index == 0 ? "transparent" : nil
+                            )
+                    }
             }
         }
     }
@@ -225,21 +244,21 @@ public struct Login {
     }
 }
 
-public struct NavigationBarSVGLogo: HTML.View {
+public struct NavigationBarSVGLogo<Content: HTML.View>: HTML.View {
     let href: Href
-    let svg: LegacySVG
+    let content: Content
 
     public init(
         href: Href,
-        svg: () -> LegacySVG
+        @HTML.Builder svg: () -> Content
     ) {
-        self.svg = svg()
+        self.content = svg()
         self.href = href
     }
 
     public var body: some HTML.View {
         Link(href: href) {
-            svg
+            content
         }
     }
 }
@@ -259,7 +278,10 @@ public struct NavigationBarCenteredNavItems: HTML.View {
                     item
                 }
             }
-            .padding(left: .small, media: .desktop)
+            .css
+            .desktop {
+                $0.padding(left: .small)
+            }
         }
 
     }
@@ -278,8 +300,12 @@ public struct NavigationBarCenteredNavItems: HTML.View {
                     title,
                     href: href
                 )
-                .padding(left: .rem(2), pseudo: .not(.firstChild))
+                .css
+                .pseudo(.not(.firstChild)) {
+                    $0.padding(left: .rem(2))
+                }
             }
+            .css
             .display(.inline)
         }
     }
@@ -300,11 +326,11 @@ public struct NavigationBarTrailingNavItems: HTML.View {
             HTMLForEach(self.items) { item in
                 item
             }
+            .css
             .display(.inline)
-            .padding(
-                left: .rem(1),
-                pseudo: .not(.firstChild)
-            )
+            .pseudo(.not(.firstChild)) {
+                $0.padding(left: .rem(1))
+            }
         }
     }
 
@@ -322,6 +348,7 @@ public struct NavigationBarTrailingNavItems: HTML.View {
                     title,
                     href: href
                 )
+                .css
                 .display(.block)
             }
         }
@@ -367,13 +394,15 @@ public struct NavigationBarTrailingNavItems: HTML.View {
     }
 #endif
 
-struct HTMLSourceText: HTML.View {
-    let html: any HTML.View
+struct HTMLSourceText<Content: HTML.View>: HTML.View {
+    // Generic rather than `any HTML.View`: the latter cannot self-conform, so it
+    // cannot be handed back to `HTML.Document`'s builder. See `HTML.AnyView`.
+    let html: Content
     var body: some HTML.View {
         HTML.Text(
             try! String(
                 HTML.Document {
-                    HTML.AnyView(html)
+                    html
                 }
             )
         )

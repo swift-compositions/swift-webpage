@@ -33,26 +33,36 @@ public struct PageHeader<Title: HTML.View, Blurb: HTML.View, CallToAction: HTML.
             ) {
                 div {
                     Header(2) { title }
+                        .css
                         .color(.text.primary)
 
                     Paragraph(.big) { blurb }
+                        .css
                         .font(.body(.regular))
                         .color(.text.secondary)
                 }
+                .css
                 .flexGrow(1)
 
                 div {
                     callToAction
                 }
             }
+            .css
             .boxSizing(.borderBox)
             .flexBasis(.percent(100))
             .maxWidth(.px(1280))
             .width(.percent(100))
-            .margin(vertical: .zero, horizontal: .auto)
+            .marginTop(.zero)
+            .marginBottom(.zero)
+            .marginLeft(.auto)
+            .marginRight(.auto)
             .padding(vertical: .rem(6), horizontal: .rem(2))
-            .padding(vertical: .rem(8), horizontal: .rem(3), media: .desktop)
+            .desktop {
+                $0.padding(vertical: .rem(8), horizontal: .rem(3))
+            }
         }
+        .css
         .boxSizing(.borderBox)
         .boxSizing(.borderBox)
     }

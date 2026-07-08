@@ -1,5 +1,7 @@
 import HTML
 
+@_spi(DynamicHTML) import HTML_Rendering_Core
+
 public struct Paragraph<Content: HTML.View>: HTML.View {
     let size: Size
     @HTML.Builder let content: Content

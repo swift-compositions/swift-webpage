@@ -11,12 +11,12 @@ import HTML
 
 public struct Halftone<Image: HTML.View>: HTML.View {
     let grayscale: String
-    let dotSize: Length
+    let dotSize: W3C_CSS_Values.Length
     let lineColor: HTMLColor
     let lineContrast: Int
     let photoBrightness: Int
     let photoContrast: Int
-    let photoBlur: Length
+    let photoBlur: W3C_CSS_Values.Length
     let blendMode: MixBlendMode
     let rotationAngle: Int
     let image: Image
@@ -27,6 +27,7 @@ public struct Halftone<Image: HTML.View>: HTML.View {
         div {
             div {
                 image
+                    .css
                     .objectPosition(objectPosition)
                     .position(.absolute)
                     .top(0)
@@ -45,13 +46,7 @@ public struct Halftone<Image: HTML.View>: HTML.View {
                         """
                     )
             }
-            .position(
-                .absolute,
-                top: .zero,
-                right: .zero,
-                bottom: .zero,
-                left: .zero
-            )
+            .css
             .position(.absolute)
             .top(.zero)
             .right(.zero)
@@ -59,27 +54,24 @@ public struct Halftone<Image: HTML.View>: HTML.View {
             .left(.zero)
             .inlineStyle("filter", "contrast(\(lineContrast)%)")
             .overflow(.hidden)
-            .inlineStyle("content", "''", pseudo: .before)
-            .position(
-                .absolute,
-                top: .percent(-50),
-                right: .percent(-50),
-                bottom: .percent(-50),
-                left: .percent(-50),
-                pseudo: .before
-            )
-            .inlineStyle(
-                "background",
-                "radial-gradient(circle at center, \(lineColor.light.description), \(lineColor.dark.description))",
-                pseudo: .before
-            )
-            .inlineStyle(
-                "background-size",
-                "\(dotSize.description) \(dotSize.description)",
-                pseudo: .before
-            )
-            .transform("rotate(\(rotationAngle)deg)", pseudo: .before)
-
+            .before {
+                $0
+                    .inlineStyle("content", "''")
+                    .position(.absolute)
+                    .top(.percent(-50))
+                    .right(.percent(-50))
+                    .bottom(.percent(-50))
+                    .left(.percent(-50))
+                    .inlineStyle(
+                        "background",
+                        "radial-gradient(circle at center, \(lineColor.light.description), \(lineColor.dark.description))"
+                    )
+                    .inlineStyle(
+                        "background-size",
+                        "\(dotSize.description) \(dotSize.description)"
+                    )
+                    .transform(.rotate(.deg(Double(rotationAngle))))
+            }
         }
     }
 }
@@ -87,12 +79,12 @@ public struct Halftone<Image: HTML.View>: HTML.View {
 extension HTML.View {
     public func halftone(
         grayscale: String = "0",
-        dotSize: Length = .em(0.3),
+        dotSize: W3C_CSS_Values.Length = .em(0.3),
         lineColor: HTMLColor = .offBlack.withDarkColor(.offWhite),
         lineContrast: Int = 2000,
         photoBrightness: Int = 100,
         photoContrast: Int = 100,
-        photoBlur: Length = .px(1),
+        photoBlur: W3C_CSS_Values.Length = .px(1),
         blendMode: MixBlendMode = .hardLight,
         rotationAngle: Int = 20
     ) -> some HTML.View {
@@ -131,6 +123,7 @@ extension Dependency.Values {
             div {
                 // Empty div with background styling
             }
+            .css
             .width(.px(300))
             .height(.px(300))
             .inlineStyle("background", "linear-gradient(45deg, #ff6b6b, #4ecdc4)")
@@ -149,6 +142,7 @@ extension Dependency.Values {
                             // Empty div with background styling
                         }
                         .halftone()
+                        .css
                         .width(.px(300))
                         .height(.px(300))
                         .inlineStyle("background", "linear-gradient(45deg, #ff6b6b, #4ecdc4)")
