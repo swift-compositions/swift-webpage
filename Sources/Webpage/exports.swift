@@ -10,4 +10,5 @@
 
 #if TRANSLATING
 @_exported import Translating
+@_exported import Translating_Dependencies
 #endif

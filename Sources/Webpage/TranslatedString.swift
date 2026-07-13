@@ -7,6 +7,7 @@
 
 #if TRANSLATING
     import Translating
+    import Translating_Dependencies
 
     extension String {
         public static var developers: TranslatedString {
