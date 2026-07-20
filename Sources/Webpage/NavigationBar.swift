@@ -34,7 +34,7 @@ public struct NavigationBar: HTML.View {
         @HTML.Builder mobileNavItems: () -> any HTML.View
     ) {
         self.logo = logo()
-        self.items = []
+        self.items = [centeredNavItems(), trailingNavItems(), mobileNavItems()]
         self.sticky = false
         self.backgroundColor = nil
         // Note: This init is deprecated and will be removed in future versions
