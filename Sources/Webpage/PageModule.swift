@@ -102,7 +102,11 @@ public struct PageModuleSeeAllTitle<Title: HTML.View>: HTML.View {
             Link(
                 href: .init(seeAllURL)
             ) {
-                "\'(String.see_all.capitalizingFirstLetter().description) →"
+                #if TRANSLATING
+                    "\(String.see_all.capitalizingFirstLetter().description) →"
+                #else
+                    "See all →"
+                #endif
             }
 
         }
