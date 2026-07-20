@@ -1,6 +1,11 @@
 import Foundation
 import HTML
 
+#if TRANSLATING
+    import Translating
+    import Translating_Dependencies
+#endif
+
 public struct PageModule<Title: HTML.View, Content: HTML.View>: HTML.View {
     let title: Title?
     var theme: PageModule.Theme
