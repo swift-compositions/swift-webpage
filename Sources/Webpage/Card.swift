@@ -15,7 +15,14 @@ public struct Card<Content: HTML.View, Header: HTML.View, Footer: HTML.View>: HT
         self.footer = footer()
     }
 
-    public var body: some HTML.View {
+    public var body:
+        HTML.CSS<
+            HTML.Styled<
+                HTML.Styled<some HTML.View, W3C_CSS_Backgrounds.BorderRadius>,
+                W3C_CSS_BoxModel.Overflow
+            >
+        >
+    {
         VStack(spacing: .rem(0)) {
             div {
                 header
