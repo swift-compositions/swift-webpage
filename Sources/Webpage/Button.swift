@@ -44,7 +44,7 @@ public struct Button<Title: HTML.View, Icon: HTML.View>: HTML.View {
     public var body: some HTML.View {
         return HTML_Standard.Button {
             HTML.Group {
-                if let icon = icon {
+                if let icon {
                     Label {
                         span { icon }
                             .css
@@ -141,8 +141,10 @@ extension HTML.View {
             switch style {
             case .primary, .secondary, .tertiary:
                 return BorderStyle.none
+
             case .round:
                 return nil
+
             default:
                 return nil
             }
@@ -152,8 +154,10 @@ extension HTML.View {
             switch style {
             case .primary, .secondary, .tertiary:
                 return background
+
             case .round:
                 return nil
+
             default:
                 return nil
             }
@@ -163,8 +167,10 @@ extension HTML.View {
             switch style {
             case .primary, .secondary, .tertiary:
                 return background.darker(by: 0.2)
+
             case .round:
                 return DarkModeColor.buttonBackground
+
             default:
                 return nil
             }
@@ -175,8 +181,10 @@ extension HTML.View {
             case .primary, .secondary, .tertiary:
                 return
                     "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, \(background.light.darker(by: 0.075)) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;"
+
             case .round:
                 return nil
+
             default:
                 return nil
             }
@@ -187,8 +195,10 @@ extension HTML.View {
             case .primary, .secondary, .tertiary:
                 return
                     "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, \(background.dark.lighter(by: 0.15)) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(255, 255, 255, 0.08) 0px 2px 5px 0px;"
+
             case .round:
                 return nil
+
             default:
                 return nil
             }

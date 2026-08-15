@@ -108,7 +108,7 @@ public struct PageModuleSeeAllTitle<Title: HTML.View>: HTML.View {
                 href: .init(seeAllURL)
             ) {
                 #if TRANSLATING
-                    "\(String.see_all.capitalizingFirstLetter().description) →"
+                    "\(String.seeAll.capitalizingFirstLetter().description) →"
                 #else
                     "See all →"
                 #endif

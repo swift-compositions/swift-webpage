@@ -53,7 +53,7 @@ public struct EmptyState<Action: HTML.View>: HTML.View {
         div {
             VStack(spacing: spacing ?? .rem(1)) {
                 // Icon
-                if let icon = icon {
+                if let icon {
                     div { icon }
                         .css
                         .fontSize(.lengthPercentage(iconSize ?? .rem(3)))
@@ -68,7 +68,7 @@ public struct EmptyState<Action: HTML.View>: HTML.View {
                     .marginBottom(.rem(0.5))
 
                 // Description
-                if let description = description {
+                if let description {
                     Paragraph { description }
                         .css
                         .color(.text.secondary)
@@ -79,7 +79,7 @@ public struct EmptyState<Action: HTML.View>: HTML.View {
                 }
 
                 // Action
-                if let action = action {
+                if let action {
                     div { action }
                         .css
                         .marginTop(.rem(1))

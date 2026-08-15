@@ -136,7 +136,7 @@ extension Dependency.Values {
     #Preview {
         HTML.Document {
             HTML.Text(
-                try! String(
+                String.renderOrTrap(
                     HTML.Document {
                         div {
                             // Empty div with background styling

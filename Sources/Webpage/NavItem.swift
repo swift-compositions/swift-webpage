@@ -5,9 +5,9 @@
 //  Navigation item types for NavigationBar
 //
 
+import CSS_Theming
 import Foundation
 import HTML
-import CSS_Theming
 
 // MARK: - NavItem Protocol
 public typealias NavItem = HTML.View

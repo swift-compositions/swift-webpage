@@ -5,9 +5,10 @@
 //  Regression tests for fable-448 F-002.
 //
 
-import Testing
-@testable import Webpage
 import HTML
+import Testing
+
+@testable import Webpage
 
 extension NavigationBar {
     @Suite

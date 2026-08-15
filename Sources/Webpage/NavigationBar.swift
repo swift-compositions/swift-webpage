@@ -8,6 +8,13 @@
 import Foundation
 import HTML
 
+// swiftlint:disable no_any_protocol_existential
+// reason: NavigationBar stores/accepts a heterogeneous mix of concrete
+// HTML.View- and NavItem-conforming types built by @HTML.Builder /
+// @Array<any NavItem>.Builder result builders. A generic parameter can
+// express only one concrete type per instantiation, not an arbitrary
+// heterogeneous collection, so type erasure via `any` is structurally
+// required here, not a substitute for a more precise generic signature.
 public struct NavigationBar: HTML.View {
     let logo: any HTML.View
     let backgroundColor: DarkModeColor?
@@ -39,6 +46,7 @@ public struct NavigationBar: HTML.View {
         self.backgroundColor = nil
         // Note: This init is deprecated and will be removed in future versions
     }
+    // swiftlint:enable no_any_protocol_existential
 
     public var body: some HTML.View {
         nav {
@@ -274,7 +282,7 @@ public struct NavigationBarCenteredNavItems: HTML.View {
     public var body: some HTML.View {
         ul {
             HTML.Group {
-                HTMLForEach(self.items) { item in
+                HTMLForEach(items) { item in
                     item
                 }
             }
@@ -323,7 +331,7 @@ public struct NavigationBarTrailingNavItems: HTML.View {
 
     public var body: some HTML.View {
         ul {
-            HTMLForEach(self.items) { item in
+            HTMLForEach(items) { item in
                 item
             }
             .css
@@ -400,7 +408,7 @@ struct HTMLSourceText<Content: HTML.View>: HTML.View {
     let html: Content
     var body: some HTML.View {
         HTML.Text(
-            try! String(
+            String.renderOrTrap(
                 HTML.Document {
                     html
                 }

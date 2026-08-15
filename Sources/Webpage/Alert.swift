@@ -76,7 +76,7 @@ public struct Alert<Content: HTML.View, Actions: HTML.View>: HTML.View {
         div {
             div {
                 // Icon
-                if let icon = icon {
+                if let icon {
                     span { icon }
                         .css
                         .fontSize(.rem(1.25))
@@ -90,7 +90,7 @@ public struct Alert<Content: HTML.View, Actions: HTML.View>: HTML.View {
 
                 // Content
                 div {
-                    if let title = title {
+                    if let title {
                         div { HTML.Text(title) }
                             .css
                             .fontWeight(.semiBold)
