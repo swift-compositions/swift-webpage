@@ -41,29 +41,31 @@ public struct Button<Title: HTML.View, Icon: HTML.View>: HTML.View {
     var textColor: DarkModeColor { DarkModeColor.theme.text.button }
     var background: DarkModeColor { DarkModeColor.theme.background.button }
 
-    public var body: some HTML.View {
-        return HTML_Standard.Button {
-            HTML.Group {
-                if let icon {
-                    Label {
-                        span { icon }
-                            .css
-                            .color(textColor)
-                    } title: {
+    public var body: HTML.AnyView {
+        HTML.AnyView(
+            HTML_Standard.Button {
+                HTML.Group {
+                    if let icon {
+                        Label {
+                            span { icon }
+                                .css
+                                .color(textColor)
+                        } title: {
+                            span { label }
+                                .css
+                                .color(textColor)
+                        }
+                    } else {
                         span { label }
                             .css
                             .color(textColor)
                     }
-                } else {
-                    span { label }
-                        .css
-                        .color(textColor)
                 }
             }
-        }
-        .buttonStyle(
-            background: background,
-            style: style
+            .buttonStyle(
+                background: background,
+                style: style
+            )
         )
     }
 }

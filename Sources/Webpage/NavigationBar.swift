@@ -48,136 +48,138 @@ public struct NavigationBar: HTML.View {
     }
     // swiftlint:enable no_any_protocol_existential
 
-    public var body: some HTML.View {
-        nav {
-            // CSS for proper mobile menu behavior
-            Style {
-                """
-                /* Hide mobile menu by default */
-                .mobile-menu {
-                    display: none;
-                    flex-basis: 100%;  /* Forces new line in flex container */
-                    width: 100%;
-                }
-
-                /* Desktop styles (769px and up) */
-                @media (min-width: 769px) {
-                    .nav-item {
-                        display: block;
-                    }
-
-                    #menu-icon {
-                        display: none !important;
-                    }
-
+    public var body: HTML.AnyView {
+        HTML.AnyView(
+            nav {
+                // CSS for proper mobile menu behavior
+                Style {
+                    """
+                    /* Hide mobile menu by default */
                     .mobile-menu {
-                        display: none !important;
-                    }
-                }
-
-                /* Mobile styles (768px and below) */
-                @media (max-width: 768px) {
-                    .nav-item {
-                        display: none !important;
+                        display: none;
+                        flex-basis: 100%;  /* Forces new line in flex container */
+                        width: 100%;
                     }
 
-                    #menu-icon {
-                        display: block;
-                        margin-left: auto;
-                    }
+                    /* Desktop styles (769px and up) */
+                    @media (min-width: 769px) {
+                        .nav-item {
+                            display: block;
+                        }
 
-                    #menu-checkbox:checked ~ .mobile-menu {
-                        display: block !important;
-                    }
-                }
-                """
-            }
+                        #menu-icon {
+                            display: none !important;
+                        }
 
-            // Main navigation container with everything inside
-            div {
-                // Checkbox inside container for sibling selector to work
-                input.checkbox
-                    .id("menu-checkbox")
-                    .css
-                    .display(Display.none)
-
-                // Logo
-                HTML.AnyView(logo)
-                    .css
-                    .lineHeight(0)
-
-                // Desktop navigation items
-                HTMLForEach(items) { item in
-                    HTML.AnyView(item)
-                        .class("nav-item")
-                }
-
-                // Mobile menu button (label only)
-                MenuButtonLabel()
-
-                // Mobile menu - inside same container, will wrap to new line
-                div {
-                    HTMLForEach(items) { item in
-                        // Skip NavSpacer in mobile menu
-                        if "\(type(of: item))".contains("NavSpacer") {
-                            HTML.Empty()
-                        } else {
-                            div {
-                                HTML.AnyView(item)
-                            }
-                            .css
-                            .padding(.rem(1))
-                            .borderBottom(width: .px(1), style: .solid, color: .border.tertiary)
+                        .mobile-menu {
+                            display: none !important;
                         }
                     }
+
+                    /* Mobile styles (768px and below) */
+                    @media (max-width: 768px) {
+                        .nav-item {
+                            display: none !important;
+                        }
+
+                        #menu-icon {
+                            display: block;
+                            margin-left: auto;
+                        }
+
+                        #menu-checkbox:checked ~ .mobile-menu {
+                            display: block !important;
+                        }
+                    }
+                    """
                 }
-                .class("mobile-menu")
+
+                // Main navigation container with everything inside
+                div {
+                    // Checkbox inside container for sibling selector to work
+                    input.checkbox
+                        .id("menu-checkbox")
+                        .css
+                        .display(Display.none)
+
+                    // Logo
+                    HTML.AnyView(logo)
+                        .css
+                        .lineHeight(0)
+
+                    // Desktop navigation items
+                    HTMLForEach(items) { item in
+                        HTML.AnyView(item)
+                            .class("nav-item")
+                    }
+
+                    // Mobile menu button (label only)
+                    MenuButtonLabel()
+
+                    // Mobile menu - inside same container, will wrap to new line
+                    div {
+                        HTMLForEach(items) { item in
+                            // Skip NavSpacer in mobile menu
+                            if "\(type(of: item))".contains("NavSpacer") {
+                                HTML.Empty()
+                            } else {
+                                div {
+                                    HTML.AnyView(item)
+                                }
+                                .css
+                                .padding(.rem(1))
+                                .borderBottom(width: .px(1), style: .solid, color: .border.tertiary)
+                            }
+                        }
+                    }
+                    .class("mobile-menu")
+                    .css
+                    .flexBasis(.percent(100))  // Forces full width = new line
+                    .borderTop(width: .px(1), style: .solid, color: .border.secondary)
+                    //                .backgroundColor(backgroundColor)
+                    .marginTop(.rem(1))
+                }
                 .css
-                .flexBasis(.percent(100))  // Forces full width = new line
-                .borderTop(width: .px(1), style: .solid, color: .border.secondary)
-                //                .backgroundColor(backgroundColor)
-                .marginTop(.rem(1))
+                .display(.flex)
+                .flexDirection(.row)
+                .flexWrap(.wrap)  // Allow wrapping for mobile menu
+                .alignItems(.center)
+                .gap(.rem(1))  // Space between all flex items
+                .desktop {
+                    $0.padding(
+                        top: .extraSmall,
+                        right: .zero,
+                        bottom: .small,
+                        left: .zero
+                    )
+                }
+                .mobile {
+                    $0.padding(
+                        top: .small,
+                        right: .medium,
+                        bottom: .small,
+                        left: .medium
+                    )
+                }
+                .maxWidth(.px(1280))
+                .marginTop(.zero)
+                .marginBottom(.zero)
+                .marginLeft(.auto)
+                .marginRight(.auto)
             }
             .css
-            .display(.flex)
-            .flexDirection(.row)
-            .flexWrap(.wrap)  // Allow wrapping for mobile menu
-            .alignItems(.center)
-            .gap(.rem(1))  // Space between all flex items
-            .desktop {
-                $0.padding(
-                    top: .extraSmall,
-                    right: .zero,
-                    bottom: .small,
-                    left: .zero
-                )
+            .width(.percent(100))
+            .if(sticky) { nav in
+                nav
+                    .css
+                    .position(.sticky)
+                    .top(.zero)
+                    .zIndex(9999)
             }
-            .mobile {
-                $0.padding(
-                    top: .small,
-                    right: .medium,
-                    bottom: .small,
-                    left: .medium
-                )
+            .if(let: backgroundColor) { nav, color in
+                nav.css.backgroundColor(color)
             }
-            .maxWidth(.px(1280))
-            .marginTop(.zero)
-            .marginBottom(.zero)
-            .marginLeft(.auto)
-            .marginRight(.auto)
-        }
-        .css
-        .width(.percent(100))
-        .if(sticky) { nav in
-            nav
-                .css
-                .position(.sticky)
-                .top(.zero)
-                .zIndex(9999)
-        }
-        .if(let: backgroundColor) { nav, color in
-            nav.css.backgroundColor(color)
-        }
+        )
     }
 
     struct MenuButtonLabel: HTML.View {
