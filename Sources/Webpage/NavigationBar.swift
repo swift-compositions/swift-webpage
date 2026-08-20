@@ -43,7 +43,7 @@ public struct NavigationBar: HTML.View {
     public var body: some HTML.View {
         nav {
             // CSS for proper mobile menu behavior
-            Style {
+            HTML.Style.Element {
                 """
                 /* Hide mobile menu by default */
                 .mobile-menu {
@@ -245,11 +245,11 @@ public struct Login {
 }
 
 public struct NavigationBarSVGLogo<Content: HTML.View>: HTML.View {
-    let href: Href
+    let href: HTML.Href.Attribute
     let content: Content
 
     public init(
-        href: Href,
+        href: HTML.Href.Attribute,
         @HTML.Builder svg: () -> Content
     ) {
         self.content = svg()
@@ -288,9 +288,9 @@ public struct NavigationBarCenteredNavItems: HTML.View {
 
     public struct NavListItem: HTML.View {
         let title: String
-        let href: Href
+        let href: HTML.Href.Attribute
 
-        public init(_ title: String, href: Href) {
+        public init(_ title: String, href: HTML.Href.Attribute) {
             self.title = title
             self.href = href
         }
@@ -336,9 +336,9 @@ public struct NavigationBarTrailingNavItems: HTML.View {
 
     public struct NavListItem: HTML.View {
         let title: String
-        let href: Href
+        let href: HTML.Href.Attribute
 
-        public init(_ title: String, href: Href) {
+        public init(_ title: String, href: HTML.Href.Attribute) {
             self.title = title
             self.href = href
         }

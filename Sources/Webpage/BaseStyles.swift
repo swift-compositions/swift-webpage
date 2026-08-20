@@ -13,8 +13,8 @@ public struct BaseStyles: HTML.View {
     }
 
     public var body: some HTML.View {
-        Style { "\(renderedNormalizeCss)" }
-        Style {
+        HTML.Style.Element { "\(renderedNormalizeCss)" }
+        HTML.Style.Element {
             """
             html {
                 font-family: ui-sans-serif, -apple-system, Helvetica Neue, Helvetica, Arial, sans-serif;

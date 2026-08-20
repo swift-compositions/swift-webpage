@@ -10,13 +10,13 @@ import HTML
 
 // MARK: - Updated Button Struct
 public struct Button<Title: HTML.View, Icon: HTML.View>: HTML.View {
-    let button: HTML_Standard.Button
+    let button: HTML.Button.Element
     let label: Title
     let icon: Icon?
     let style: ButtonStyle
 
     public init(
-        button: HTML_Standard.Button = .init(),
+        button: HTML.Button.Element = .init(),
         style: ButtonStyle = .default,
         @HTML.Builder label: () -> Title,
         @HTML.Builder icon: () -> Icon
@@ -28,7 +28,7 @@ public struct Button<Title: HTML.View, Icon: HTML.View>: HTML.View {
     }
 
     public init(
-        button: HTML_Standard.Button = .init(),
+        button: HTML.Button.Element = .init(),
         style: ButtonStyle = .default,
         @HTML.Builder label: () -> Title
     ) where Icon == HTML.Empty {
@@ -42,7 +42,7 @@ public struct Button<Title: HTML.View, Icon: HTML.View>: HTML.View {
     var background: DarkModeColor { DarkModeColor.theme.background.button }
 
     public var body: some HTML.View {
-        return HTML_Standard.Button {
+        return HTML.Button.Element {
             HTML.Group {
                 if let icon = icon {
                     Label {

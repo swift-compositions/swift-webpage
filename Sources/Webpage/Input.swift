@@ -9,16 +9,16 @@ import HTML
 
 public struct Input<CodingKey: RawRepresentable>: HTML.View where CodingKey.RawValue == String {
     public let codingKey: CodingKey
-    public let disabled: HTML_Standard_Attributes.Disabled?
-    public let form: HTML_Standard_Attributes.Form.ID?
-    public let type: HTML_Standard.Input.Variant
+    public let disabled: HTML.Disabled.Attribute?
+    public let form: HTML.Form.Attribute.ID?
+    public let type: HTML.Input.Element.Variant
     public var style: Input.Style = .default
 
     public init(
         codingKey: CodingKey,
-        disabled: HTML_Standard_Attributes.Disabled? = nil,
-        form: HTML_Standard_Attributes.Form.ID? = nil,
-        type: HTML_Standard.Input.Variant
+        disabled: HTML.Disabled.Attribute? = nil,
+        form: HTML.Form.Attribute.ID? = nil,
+        type: HTML.Input.Element.Variant
     ) {
         self.codingKey = codingKey
         self.disabled = disabled

@@ -20,14 +20,14 @@ import HTML
 public struct Link<Label: HTML.View>: HTML.View {
     @Dependency(\.linkStyle) var linkStyle
     let label: Label
-    let href: Href?
+    let href: HTML.Href.Attribute?
 
-    public init(href: Href?, @HTML.Builder label: () -> Label) {
+    public init(href: HTML.Href.Attribute?, @HTML.Builder label: () -> Label) {
         self.href = href
         self.label = label()
     }
 
-    public init(_ title: String, href: Href?) where Label == HTML.Text {
+    public init(_ title: String, href: HTML.Href.Attribute?) where Label == HTML.Text {
         self.init(href: href) {
             HTML.Text(title)
         }

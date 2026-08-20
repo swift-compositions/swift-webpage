@@ -45,7 +45,7 @@ public struct _ModernHead<CustomHead: HTML.View>: HTML.View {
             meta(charset: .utf8)
             BaseStyles()
 
-            Style {
+            HTML.Style.Element {
                 """
 
                 body, html {

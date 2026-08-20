@@ -19,12 +19,12 @@ public struct NavLink: HTML.View {
     // ecosystem composes through the concrete `HTML.AnyView` eraser plus generics
     // (see the type comment on `HTML.AnyView`). Erase once, at construction.
     let title: HTML.AnyView
-    let href: Href
+    let href: HTML.Href.Attribute
     let isActive: Bool
 
     public init<Title: HTML.View>(
         _ title: Title,
-        href: Href,
+        href: HTML.Href.Attribute,
         isActive: Bool
     ) {
         self.title = HTML.AnyView(title)
@@ -80,12 +80,12 @@ public struct NavButton: HTML.View {
     }
 
     let title: String
-    let href: Href
+    let href: HTML.Href.Attribute
     let style: Style
 
     public init(
         _ title: String,
-        href: Href,
+        href: HTML.Href.Attribute,
         style: Style = .primary
     ) {
         self.title = title
