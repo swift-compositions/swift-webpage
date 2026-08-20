@@ -1,15 +1,15 @@
-// swift-tools-version: 6.3.3
+// swift-tools-version: 6.4
 
 import PackageDescription
 
 let package = Package(
     name: "swift-webpage",
     platforms: [
-        .iOS("27"),
-        .macOS("27"),
-        .tvOS("27"),
-        .watchOS("27"),
-        .macCatalyst(.v18)
+        .iOS(.v27),
+        .macOS(.v27),
+        .tvOS(.v27),
+        .watchOS(.v27),
+        .macCatalyst(.v18),
     ],
     products: [
         .library(
@@ -26,10 +26,16 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/swift-foundations/swift-html.git", branch: "main"),
         .package(url: "https://github.com/swift-foundations/swift-css.git", branch: "main"),
-        .package(url: "https://github.com/swift-foundations/swift-dependencies.git", branch: "main"),
+        .package(
+            url: "https://github.com/swift-foundations/swift-dependencies.git",
+            branch: "main"
+        ),
         .package(url: "https://github.com/swift-incits/swift-incits-4-1986.git", branch: "main"),
         .package(url: "https://github.com/swift-foundations/swift-translating.git", branch: "main"),
-        .package(url: "https://github.com/swift-foundations/swift-translating-dependencies.git", branch: "main")
+        .package(
+            url: "https://github.com/swift-foundations/swift-translating-dependencies.git",
+            branch: "main"
+        ),
     ],
     targets: [
         .target(
@@ -37,7 +43,8 @@ let package = Package(
             dependencies: [
                 .product(name: "HTML", package: "swift-html"),
                 .product(name: "CSS Theming", package: "swift-css"),
-                .product(name: "Dependencies", package: "swift-dependencies"),                .product(name: "INCITS 4 1986", package: "swift-incits-4-1986"),
+                .product(name: "Dependencies", package: "swift-dependencies"),
+                .product(name: "INCITS 4 1986", package: "swift-incits-4-1986"),
                 .product(
                     name: "Translating",
                     package: "swift-translating",
@@ -47,7 +54,7 @@ let package = Package(
                     name: "Translating Dependencies",
                     package: "swift-translating-dependencies",
                     condition: .when(traits: ["Translating"])
-                )
+                ),
             ],
             swiftSettings: [
                 .define("TRANSLATING", .when(traits: ["Translating"]))
@@ -56,16 +63,17 @@ let package = Package(
         .testTarget(
             name: "Webpage Tests",
             dependencies: ["Webpage"]
-        )
+        ),
     ],
     swiftLanguageModes: [.v6]
 )
 
 for target in package.targets where ![.system, .binary, .plugin].contains(target.type) {
     let existing = target.swiftSettings ?? []
-    target.swiftSettings = existing + [
-        .enableUpcomingFeature("ExistentialAny"),
-        .enableUpcomingFeature("InternalImportsByDefault"),
-        .enableUpcomingFeature("MemberImportVisibility")
-    ]
+    target.swiftSettings =
+        existing + [
+            .enableUpcomingFeature("ExistentialAny"),
+            .enableUpcomingFeature("InternalImportsByDefault"),
+            .enableUpcomingFeature("MemberImportVisibility"),
+        ]
 }
