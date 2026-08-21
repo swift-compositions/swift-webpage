@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  coenttb-web
-//
-//  Created by Coen ten Thije Boonkkamp on 03/09/2024.
-//
-
 import HTML
 
 public struct Input<CodingKey: RawRepresentable>: HTML.View where CodingKey.RawValue == String {
@@ -86,7 +79,6 @@ extension Input {
                     .backgroundColor(.transparent)
                     .color(.text.primary)
                     .borderBottom(.init(.px(5), .solid))
-            //                .borderBottomColor(.color(.gray400.withDarkColor(.gray600)))
 
             case .error:
                 html

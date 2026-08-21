@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  coenttb-web
-//
-//  Created by Coen ten Thije Boonkkamp on 31/08/2024.
-//
-
 import Foundation
 import HTML
 
@@ -54,7 +47,7 @@ public struct Overlay<Content: HTML.View>: HTML.View {
             .transform(
                 .compound([
                     .translate(.percent(-50), .percent(-50)),
-                    .scale(sx: 0.95)
+                    .scale(sx: 0.95),
                 ])
             )
             .inlineStyle("transition", "opacity 0.3s ease, transform 0.3s ease")

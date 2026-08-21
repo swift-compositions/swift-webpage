@@ -1,13 +1,5 @@
-//
-//  File.swift
-//
-//
-//  Created by Coen ten Thije Boonkkamp on 28/07/2024.
-//
-
 import HTML
 
-// Version without custom head content
 extension HTML.Document where Body: HTML.View, Head == _ModernHead<Empty> {
     public static func modern(
         @HTML.Builder body: () -> Body
@@ -19,7 +11,6 @@ extension HTML.Document where Body: HTML.View, Head == _ModernHead<Empty> {
     }
 }
 
-// Version with custom head content
 extension HTML.Document where Body: HTML.View {
     public static func modern<CustomHead: HTML.View>(
         @HTML.Builder body: () -> Body,
@@ -64,7 +55,6 @@ public struct _ModernHead<CustomHead: HTML.View>: HTML.View {
     }
 }
 
-// Empty for when no custom head is provided
 public struct Empty: HTML.View {
     public init() {}
     public var body: some HTML.View {

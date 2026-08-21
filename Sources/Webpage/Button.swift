@@ -1,14 +1,6 @@
-//
-//  File.swift
-//  coenttb-com-server
-//
-//  Created by Coen ten Thije Boonkkamp on 14/07/2025.
-//
-
 import Foundation
 import HTML
 
-// MARK: - Updated Button Struct
 public struct Button<Title: HTML.View, Icon: HTML.View>: HTML.View {
     let button: HTML.Button.Element
     let label: Title
@@ -68,7 +60,6 @@ public struct Button<Title: HTML.View, Icon: HTML.View>: HTML.View {
     }
 }
 
-// MARK: - Button Style
 public struct ButtonStyle: Equatable {
     public let cornerRadius: LengthPercentage
     public let verticalPadding: LengthPercentage
@@ -119,23 +110,11 @@ public struct ButtonStyle: Equatable {
     }
 }
 
-// MARK: - HTML Protocol Extension
 extension HTML.View {
     public func buttonStyle(
         background: DarkModeColor,
         style: ButtonStyle = .default
     ) -> some HTML.View {
-
-        //        let borderColor: DarkModeColor? = {
-        //            switch style {
-        //            case .primary, .secondary, .tertiary:
-        //                return background.darker(by: 0.15)
-        //            case .round:
-        //                return nil
-        //            default:
-        //                return nil
-        //            }
-        //        }()
 
         let borderStyle: BorderStyle? = {
             switch style {
@@ -197,7 +176,7 @@ extension HTML.View {
         return
             self
             .css
-            //            .color(color)
+
             .padding(
                 vertical: style.verticalPadding,
                 horizontal: style.horizontalPadding
@@ -241,26 +220,3 @@ extension HTML.View {
 
     }
 }
-
-//
-//
-// #if DEBUG && canImport(SwiftUI) && os(macOS)
-// import Dependencies
-// import SwiftUI
-//
-// #Preview {
-//    HTML.Document {
-//        withDependencies {
-//            $0.theme.text.button = .yellow
-//            $0.theme.background.button = .red
-//        } operation: {
-//            HTMLWebsite.Button(
-//                button: .init(type: .submit)
-//            ) {
-//                "Hello"
-//            }
-//        }
-//    }
-//    .frame(height: 800)
-// }
-// #endif

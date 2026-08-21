@@ -1,34 +1,20 @@
-//
-//  EmptyState.swift
-//  swift-html
-//
-//  A reusable empty state component for when there's no data to display
-//
-
 import Foundation
 import HTML
 
-/// A component for displaying empty states with optional icon, title, description, and action
 public struct EmptyState<Action: HTML.View>: HTML.View {
-    /// Optional icon or emoji to display
+
     let icon: String?
 
-    /// The title message
     let title: String
 
-    /// Optional description text
     let description: String?
 
-    /// Optional action button or link
     let action: Action?
 
-    /// Text alignment for the content
     let textAlign: TextAlign
 
-    /// Optional custom spacing between elements
     let spacing: W3C_CSS_Values.Length?
 
-    /// Optional icon size
     let iconSize: LengthPercentage?
 
     public init(
@@ -52,7 +38,7 @@ public struct EmptyState<Action: HTML.View>: HTML.View {
     public var body: some HTML.View {
         div {
             VStack(spacing: spacing ?? .rem(1)) {
-                // Icon
+
                 if let icon = icon {
                     div { icon }
                         .css
@@ -60,14 +46,12 @@ public struct EmptyState<Action: HTML.View>: HTML.View {
                         .marginBottom(.rem(0.5))
                 }
 
-                // Title
                 Header(2) { title }
                     .css
                     .fontSize(.rem(1.5))
                     .color(.text.primary)
                     .marginBottom(.rem(0.5))
 
-                // Description
                 if let description = description {
                     Paragraph { description }
                         .css
@@ -78,7 +62,6 @@ public struct EmptyState<Action: HTML.View>: HTML.View {
                         .marginBottom(.rem(1))
                 }
 
-                // Action
                 if let action = action {
                     div { action }
                         .css
@@ -92,10 +75,8 @@ public struct EmptyState<Action: HTML.View>: HTML.View {
     }
 }
 
-// MARK: - Convenience Initializers
-
 extension EmptyState where Action == HTML.Empty {
-    /// Creates an empty state without an action
+
     public init(
         icon: String? = nil,
         title: String,
@@ -114,64 +95,8 @@ extension EmptyState where Action == HTML.Empty {
     }
 }
 
-// extension EmptyState where Action == Link<HTML.Text> {
-//    /// Creates an empty state with a simple link action
-//    public init(
-//        icon: String? = nil,
-//        title: String,
-//        description: String? = nil,
-//        actionText: String,
-//        actionHref: URL,
-//        textAlign: TextAlign = .center,
-//        spacing: Length? = nil,
-//        iconSize: LengthPercentage? = nil
-//    ) {
-//        self.init(
-//            icon: icon,
-//            title: title,
-//            description: description,
-//            textAlign: textAlign,
-//            spacing: spacing,
-//            iconSize: iconSize
-//        ) {
-//            Link(href: .init(actionHref)) { actionText }
-//                .linkColor(.branding.primary)
-//                .fontWeight(.medium)
-//        }
-//    }
-// }
-
-// extension EmptyState where Action == HTMLWebsite.Button<HTML.Text, HTML.Empty> {
-//    /// Creates an empty state with a button action
-//    public init(
-//        icon: String? = nil,
-//        title: String,
-//        description: String? = nil,
-//        actionText: String,
-//        buttonStyle: ButtonStyle = .default,
-//        textAlign: TextAlign = .center,
-//        spacing: Length? = nil,
-//        iconSize: LengthPercentage? = nil
-//    ) {
-//        self.init(
-//            icon: icon,
-//            title: title,
-//            description: description,
-//            textAlign: textAlign,
-//            spacing: spacing,
-//            iconSize: iconSize
-//        ) {
-//            HTMLWebsite.Button(style: buttonStyle) {
-//                HTML.Text(actionText)
-//            }
-//        }
-//    }
-// }
-
-// MARK: - Common Empty States
-
 extension EmptyState {
-    /// Creates a "No Data" empty state
+
     public static func noData<A: HTML.View>(
         title: String = "No Data Yet",
         description: String? = "Start by adding some data to see it here.",
@@ -185,7 +110,6 @@ extension EmptyState {
         )
     }
 
-    /// Creates a "No Results" empty state for search
     public static func noResults<A: HTML.View>(
         searchTerm: String? = nil,
         @HTML.Builder action: () -> A = { HTML.Empty() }
@@ -199,7 +123,6 @@ extension EmptyState {
         )
     }
 
-    /// Creates a "Coming Soon" empty state
     public static func comingSoon<A: HTML.View>(
         feature: String? = nil,
         @HTML.Builder action: () -> A = { HTML.Empty() }
@@ -213,7 +136,6 @@ extension EmptyState {
         )
     }
 
-    /// Creates an error empty state
     public static func error<A: HTML.View>(
         message: String? = "Something went wrong. Please try again.",
         @HTML.Builder action: () -> A = { HTML.Empty() }

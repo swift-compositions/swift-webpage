@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  coenttb-web
-//
-//  Created by Coen ten Thije Boonkkamp on 14/08/2024.
-//
-
 import Foundation
 import HTML
 
@@ -26,7 +19,6 @@ public struct NavigationBar: HTML.View {
         self.backgroundColor = backgroundColor
     }
 
-    // Legacy init for backward compatibility
     public init(
         @HTML.Builder logo: () -> any HTML.View,
         @HTML.Builder centeredNavItems: () -> any HTML.View,
@@ -37,12 +29,12 @@ public struct NavigationBar: HTML.View {
         self.items = [centeredNavItems(), trailingNavItems(), mobileNavItems()]
         self.sticky = false
         self.backgroundColor = nil
-        // Note: This init is deprecated and will be removed in future versions
+
     }
 
     public var body: some HTML.View {
         nav {
-            // CSS for proper mobile menu behavior
+
             HTML.Style.Element {
                 """
                 /* Hide mobile menu by default */
@@ -85,32 +77,27 @@ public struct NavigationBar: HTML.View {
                 """
             }
 
-            // Main navigation container with everything inside
             div {
-                // Checkbox inside container for sibling selector to work
+
                 input.checkbox
                     .id("menu-checkbox")
                     .css
                     .display(Display.none)
 
-                // Logo
                 HTML.AnyView(logo)
                     .css
                     .lineHeight(0)
 
-                // Desktop navigation items
                 HTMLForEach(items) { item in
                     HTML.AnyView(item)
                         .class("nav-item")
                 }
 
-                // Mobile menu button (label only)
                 MenuButtonLabel()
 
-                // Mobile menu - inside same container, will wrap to new line
                 div {
                     HTMLForEach(items) { item in
-                        // Skip NavSpacer in mobile menu
+
                         if "\(type(of: item))".contains("NavSpacer") {
                             HTML.Empty()
                         } else {
@@ -125,17 +112,17 @@ public struct NavigationBar: HTML.View {
                 }
                 .class("mobile-menu")
                 .css
-                .flexBasis(.percent(100))  // Forces full width = new line
+                .flexBasis(.percent(100))
                 .borderTop(width: .px(1), style: .solid, color: .border.secondary)
-                //                .backgroundColor(backgroundColor)
+
                 .marginTop(.rem(1))
             }
             .css
             .display(.flex)
             .flexDirection(.row)
-            .flexWrap(.wrap)  // Allow wrapping for mobile menu
+            .flexWrap(.wrap)
             .alignItems(.center)
-            .gap(.rem(1))  // Space between all flex items
+            .gap(.rem(1))
             .desktop {
                 $0.padding(
                     top: .extraSmall,
@@ -179,7 +166,7 @@ public struct NavigationBar: HTML.View {
                 .attribute("for", "menu-checkbox")
                 .css
                 .cursor(.pointer)
-                .marginLeft(.auto)  // Push to right side
+                .marginLeft(.auto)
                 .desktop {
                     $0.display(Display.none)
                 }
@@ -395,8 +382,7 @@ public struct NavigationBarTrailingNavItems: HTML.View {
 #endif
 
 struct HTMLSourceText<Content: HTML.View>: HTML.View {
-    // Generic rather than `any HTML.View`: the latter cannot self-conform, so it
-    // cannot be handed back to `HTML.Document`'s builder. See `HTML.AnyView`.
+
     let html: Content
     var body: some HTML.View {
         HTML.Text(

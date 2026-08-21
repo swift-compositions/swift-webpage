@@ -1,10 +1,3 @@
-//
-//  File.swift
-//
-//
-//  Created by Coen ten Thije Boonkkamp on 23-12-2023.
-//
-
 #if TRANSLATING
     import Translating
     import Translating_Dependencies
@@ -279,7 +272,7 @@
 
         public static var blog: TranslatedString {
             .init(
-                //        dutch: "blog",
+
                 english: "blog"
             )
         }
@@ -325,13 +318,6 @@
                 english: "check your mail"
             )
         }
-
-        //    static func this_link_is_valid_for(_ duration: Date.Time) -> TranslatedString {
-        //        .init(
-        //            dutch: "deze link is geldig voor \(duration.description().description)",
-        //            english: "this link is valid for \(duration.description().description)"
-        //        )
-        //    }
 
         public static var we_have_emailed_you_instructions_to_reset_your_password: TranslatedString
         {
@@ -493,7 +479,7 @@
 
         public static var under_construction: TranslatedString {
             .init(
-                //        dutch: "",
+
                 english: "under construction"
             )
         }

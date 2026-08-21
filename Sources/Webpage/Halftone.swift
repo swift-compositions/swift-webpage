@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  coenttb-web
-//
-//  Created by Coen ten Thije Boonkkamp on 01/09/2024.
-//
-
 public import Dependencies
 import Foundation
 import HTML
@@ -103,7 +96,6 @@ extension HTML.View {
     }
 }
 
-// Unsure whether this should be added.
 private enum ObjectStyleKey: Dependency.Key {
     static let liveValue = ObjectStyle(position: .inherit)
     static let testValue = ObjectStyle(position: .inherit)
@@ -121,14 +113,14 @@ extension Dependency.Values {
     #Preview {
         HTML.Document {
             div {
-                // Empty div with background styling
+
             }
             .css
             .width(.px(300))
             .height(.px(300))
             .inlineStyle("background", "linear-gradient(45deg, #ff6b6b, #4ecdc4)")
-            .halftone(  //            dotSize: .px(4),
-                //            lineColor: .black
+            .halftone(
+
                 )
         }
     }
@@ -139,7 +131,7 @@ extension Dependency.Values {
                 try! String(
                     HTML.Document {
                         div {
-                            // Empty div with background styling
+
                         }
                         .halftone()
                         .css
@@ -152,28 +144,3 @@ extension Dependency.Values {
         }
     }
 #endif
-
-// EXAMPLE FOR GENERATING BLOG POST CARD IMAGE
-// PageModule(theme: .content) {
-//    div {
-//        div {
-//            div {
-//                Image.prehalftone
-//                    .inlineStyle("filter", "sepia(0.8) hue-rotate(-260deg) saturate(2) brightness(1.15) contrast(1.2)")
-//                    .halftone(
-//                        lineColor: .black.withDarkColor(.white),
-//                        lineContrast: 1500,
-//                        photoBrightness: 90,
-//                        photoContrast: 110,
-//                        photoBlur: .px(0.5),
-//                        blendMode: .overlay,
-//                        rotationAngle: 15
-//                    )
-//            }
-//            .overflow(.hidden)
-//        }
-//        .height(.px(300))
-//        .width(.px(384))
-//    }
-//    .position(.relative)
-// }

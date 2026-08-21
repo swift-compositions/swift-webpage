@@ -1,15 +1,7 @@
-//
-//  PageModuleSeeAllTitle Tests.swift
-//  swift-webpage
-//
-//  Regression tests for fable-448 F-001. `PageModuleSeeAllTitle` is generic
-//  over `Title`, so this uses the generic-namespace carve-out: a top-level
-//  `@Suite("Name") struct Tests`.
-//
-
-import Testing
-@testable import Webpage
 import HTML
+import Testing
+
+@testable import Webpage
 
 @Suite("PageModuleSeeAllTitle")
 struct Tests {

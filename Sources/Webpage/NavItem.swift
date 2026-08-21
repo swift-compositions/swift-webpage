@@ -1,23 +1,11 @@
-//
-//  NavItem.swift
-//  swift-html
-//
-//  Navigation item types for NavigationBar
-//
-
+import CSS_Theming
 import Foundation
 import HTML
-import CSS_Theming
 
-// MARK: - NavItem Protocol
 public typealias NavItem = HTML.View
 
-// MARK: - NavLink
 public struct NavLink: HTML.View {
-    // `HTML.View` refines the move-only `Render.View` and carries a recursive
-    // `Body: HTML.View` constraint, so `any HTML.View` cannot self-conform. The
-    // ecosystem composes through the concrete `HTML.AnyView` eraser plus generics
-    // (see the type comment on `HTML.AnyView`). Erase once, at construction.
+
     let title: HTML.AnyView
     let href: HTML.Href.Attribute
     let isActive: Bool
@@ -47,7 +35,6 @@ public struct NavLink: HTML.View {
     }
 }
 
-// MARK: - NavButton
 public struct NavButton: HTML.View {
     public enum Style {
         case primary
@@ -121,7 +108,6 @@ public struct NavButton: HTML.View {
     }
 }
 
-// MARK: - NavDivider
 public struct NavDivider: HTML.View {
     public init() {}
 
@@ -136,7 +122,6 @@ public struct NavDivider: HTML.View {
     }
 }
 
-// MARK: - NavDropdown
 public struct NavDropdown<Items: HTML.View>: HTML.View {
     let title: String
     let items: Items
@@ -190,20 +175,18 @@ public struct NavDropdown<Items: HTML.View>: HTML.View {
     }
 }
 
-// MARK: - NavSpacer
 public struct NavSpacer: HTML.View {
     public init() {}
 
     public var body: some HTML.View {
         div {}
             .css
-            .flexGrow(1)  // Takes up all available space between items
+            .flexGrow(1)
             .desktop { $0.display(.block) }
-            .mobile { $0.display(Display.none) }  // Hide on mobile
+            .mobile { $0.display(Display.none) }
     }
 }
 
-// MARK: - NavGroup
 public struct NavGroup<Items: HTML.View>: HTML.View {
     let items: Items
     let spacing: W3C_CSS_Values.Length

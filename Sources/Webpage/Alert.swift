@@ -1,6 +1,5 @@
 import HTML
 
-// MARK: - Alert Component
 public struct Alert<Content: HTML.View, Actions: HTML.View>: HTML.View {
     public enum Severity {
         case info
@@ -52,10 +51,6 @@ public struct Alert<Content: HTML.View, Actions: HTML.View>: HTML.View {
     let content: Content
     let actions: Actions
 
-    // No default for `actions:` — `extension Alert where Actions == HTML.Empty`
-    // below already supplies it. A default expression here would additionally be
-    // used to infer `Actions`, which Swift rejects (a hard error in a future
-    // language mode) because `Actions` is already inferrable from the signature.
     public init(
         severity: Severity = .info,
         title: String? = nil,
@@ -75,7 +70,7 @@ public struct Alert<Content: HTML.View, Actions: HTML.View>: HTML.View {
     public var body: some HTML.View {
         div {
             div {
-                // Icon
+
                 if let icon = icon {
                     span { icon }
                         .css
@@ -88,7 +83,6 @@ public struct Alert<Content: HTML.View, Actions: HTML.View>: HTML.View {
                         .marginRight(.rem(0.75))
                 }
 
-                // Content
                 div {
                     if let title = title {
                         div { HTML.Text(title) }
@@ -102,7 +96,6 @@ public struct Alert<Content: HTML.View, Actions: HTML.View>: HTML.View {
                 .css
                 .flexGrow()
 
-                // Actions
                 if !(actions is HTML.Empty) {
                     div {
                         actions
@@ -113,7 +106,6 @@ public struct Alert<Content: HTML.View, Actions: HTML.View>: HTML.View {
                     .marginLeft(.rem(1))
                 }
 
-                // Dismiss button
                 if dismissible {
                     button {
                         "×"
@@ -144,7 +136,6 @@ public struct Alert<Content: HTML.View, Actions: HTML.View>: HTML.View {
     }
 }
 
-// MARK: - Banner Component
 public struct Banner<Content: HTML.View, Actions: HTML.View>: HTML.View {
     public enum Style {
         case standard
@@ -167,8 +158,6 @@ public struct Banner<Content: HTML.View, Actions: HTML.View>: HTML.View {
     let content: Content
     let actions: Actions
 
-    // No default for `actions:` — see the note on `Alert.init`; the
-    // `extension Banner where Actions == HTML.Empty` convenience init supplies it.
     public init(
         style: Style = .standard,
         backgroundColor: DarkModeColor = .blue,
@@ -222,7 +211,6 @@ public struct Banner<Content: HTML.View, Actions: HTML.View>: HTML.View {
     }
 }
 
-// MARK: - Convenience Initializers
 extension Alert where Actions == HTML.Empty {
     public init(
         severity: Severity = .info,

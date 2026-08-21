@@ -1,19 +1,3 @@
-//
-//  Link.swift
-//  swift-webpage
-//
-//  Restored during the §Swap-2 institute port. The pre-port file was commented out
-//  wholesale, which silently bound every `Link(href:) { … }` call site in
-//  NavigationBar.swift to `HTML_Standard.Link` — the void `<link rel=…>` element —
-//  instead of this anchor wrapper. That produced `missing argument label 'as:'` and
-//  `value of type 'Link' has no member 'padding'` rather than a "not found" error.
-//
-//  The three `HTML.View` helpers the pre-port file carried (`linkColor`,
-//  `linkUnderline`, `linkStyle`) are NOT restored: each was built on a
-//  `.dependency(_:_:)` view modifier that has no institute counterpart. Scope a
-//  `LinkStyle` with `withDependencies { $0.linkStyle = … }` instead.
-//
-
 import Dependencies
 import HTML
 

@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  swift-html
-//
-//  Created by Coen ten Thije Boonkkamp on 07/10/2024.
-//
-
 import HTML
 
 public struct BaseStyles: HTML.View {

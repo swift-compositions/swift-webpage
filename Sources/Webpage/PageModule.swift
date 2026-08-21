@@ -21,17 +21,6 @@ public struct PageModule<Title: HTML.View, Content: HTML.View>: HTML.View {
         self.content = content()
     }
 
-    //    public init(
-    //        title: String,
-    //        seeAllURL: String? = nil,
-    //        theme: PageModule.Theme,
-    //        @HTML.Builder content: () -> Content
-    //    ) where Title == Header<HTML.Text> {
-    //        self.title = Header(3) { HTML.Text(title) }
-    //        self.theme = theme
-    //        self.content = content()
-    //    }
-
     public init(
         theme: PageModule.Theme,
         @HTML.Builder content: () -> Content
