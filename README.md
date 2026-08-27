@@ -8,7 +8,7 @@ Composable web-page UI components — page headers, navigation bars, cards, aler
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-foundations/swift-webpage.git", branch: "main")
+    .package(url: "https://github.com/swift-compositions/swift-webpage.git", branch: "main")
 ]
 ```
 

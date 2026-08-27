@@ -24,16 +24,16 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/swift-foundations/swift-html.git", branch: "main"),
-        .package(url: "https://github.com/swift-foundations/swift-css.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-html.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-css.git", branch: "main"),
         .package(
-            url: "https://github.com/swift-foundations/swift-dependencies.git",
+            url: "https://github.com/swift-compositions/swift-dependencies.git",
             branch: "main"
         ),
         .package(url: "https://github.com/swift-incits/swift-incits-4-1986.git", branch: "main"),
-        .package(url: "https://github.com/swift-foundations/swift-translating.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-translating.git", branch: "main"),
         .package(
-            url: "https://github.com/swift-foundations/swift-translating-dependencies.git",
+            url: "https://github.com/swift-compositions/swift-translating-dependencies.git",
             branch: "main"
         ),
     ],

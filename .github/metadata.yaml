@@ -1,7 +1,7 @@
 # .github/metadata.yaml
 description: "Composable web-page UI components (headers, navigation bars, cards, alerts) built on the swift-html view DSL."
 topics:
-  - foundations
+  - compositions
   - html
   - web
 homepage: "https://swift-institute.org"
