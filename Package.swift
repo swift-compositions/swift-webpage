@@ -5,11 +5,11 @@ import PackageDescription
 let package = Package(
     name: "swift-webpage",
     platforms: [
-        .iOS(.v27),
         .macOS(.v27),
+        .iOS(.v27),
         .tvOS(.v27),
         .watchOS(.v27),
-        .macCatalyst(.v18),
+        .visionOS(.v27),
     ],
     products: [
         .library(
