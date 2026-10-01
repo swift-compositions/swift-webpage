@@ -25,6 +25,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/swift-compositions/swift-html.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-standard-library-extensions.git", branch: "main"),
         .package(url: "https://github.com/swift-compositions/swift-css.git", branch: "main"),
         .package(
             url: "https://github.com/swift-compositions/swift-dependencies.git",
@@ -41,6 +42,7 @@ let package = Package(
         .target(
             name: "Webpage",
             dependencies: [
+                .product(name: "Standard Library Extensions", package: "swift-standard-library-extensions"),
                 .product(name: "HTML", package: "swift-html"),
                 .product(name: "CSS Theming", package: "swift-css"),
                 .product(name: "Dependencies", package: "swift-dependencies"),
@@ -62,7 +64,10 @@ let package = Package(
         ),
         .testTarget(
             name: "Webpage Tests",
-            dependencies: ["Webpage"]
+            dependencies: [
+                "Webpage",
+                .product(name: "Standard Library Extensions", package: "swift-standard-library-extensions"),
+            ]
         ),
     ],
     swiftLanguageModes: [.v6]

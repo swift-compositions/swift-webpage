@@ -1,5 +1,6 @@
 import Foundation
 import HTML
+import Standard_Library_Extensions
 
 public struct NavigationBar: HTML.View {
     let logo: any HTML.View
