@@ -389,6 +389,7 @@ struct HTMLSourceText<Content: HTML.View>: HTML.View {
         // swift-format-ignore: NeverUseForceTry
         // REASON: rendering a statically composed document; a failure is a programmer error.
         HTML.Text(
+            // swiftlint:disable:next force_try
             try! String(
                 HTML.Document {
                     html

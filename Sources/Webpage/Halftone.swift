@@ -130,6 +130,7 @@ extension Dependency.Values {
         // REASON: preview-only rendering of a static document; a failure is a programmer error.
         HTML.Document {
             HTML.Text(
+                // swiftlint:disable:next force_try
                 try! String(
                     HTML.Document {
                         div {
