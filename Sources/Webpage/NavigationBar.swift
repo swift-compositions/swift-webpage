@@ -386,6 +386,8 @@ struct HTMLSourceText<Content: HTML.View>: HTML.View {
 
     let html: Content
     var body: some HTML.View {
+        // swift-format-ignore: NeverUseForceTry
+        // REASON: rendering a statically composed document; a failure is a programmer error.
         HTML.Text(
             try! String(
                 HTML.Document {

@@ -126,6 +126,8 @@ extension Dependency.Values {
     }
 
     #Preview {
+        // swift-format-ignore: NeverUseForceTry
+        // REASON: preview-only rendering of a static document; a failure is a programmer error.
         HTML.Document {
             HTML.Text(
                 try! String(

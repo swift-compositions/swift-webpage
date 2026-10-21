@@ -95,7 +95,7 @@ public struct NavButton: HTML.View {
             button.border(
                 width: .px(1),
                 style: .solid,
-                color: style.borderColor!
+                color: style.borderColor ?? style.backgroundColor
             )
         }
         .css

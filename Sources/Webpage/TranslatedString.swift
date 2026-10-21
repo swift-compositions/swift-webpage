@@ -224,8 +224,7 @@
         }
 
         public static
-            var when_you_change_your_password_we_keep_you_logged_in_to_this_device_but_may_log_you_out_from_your_other_devices:
-            TranslatedString
+            var when_you_change_your_password_we_keep_you_logged_in_to_this_device_but_may_log_you_out_from_your_other_devices: TranslatedString
         {
             .init(
                 dutch:
@@ -319,8 +318,7 @@
             )
         }
 
-        public static var we_have_emailed_you_instructions_to_reset_your_password: TranslatedString
-        {
+        public static var we_have_emailed_you_instructions_to_reset_your_password: TranslatedString {
             .init(
                 dutch:
                     "we hebben u per e-mail instructies gestuurd om uw wachtwoord opnieuw in te stellen",
@@ -329,8 +327,7 @@
         }
 
         public static
-            var please_check_your_inbox_and_click_the_link_in_the_email_to_reset_your_password:
-            TranslatedString
+            var please_check_your_inbox_and_click_the_link_in_the_email_to_reset_your_password: TranslatedString
         {
             .init(
                 dutch:
@@ -341,8 +338,7 @@
         }
 
         public static
-            var if_you_dont_receive_an_email_from_us_within_a_few_minutes_please_check_your_spam_folder:
-            TranslatedString
+            var if_you_dont_receive_an_email_from_us_within_a_few_minutes_please_check_your_spam_folder: TranslatedString
         {
             .init(
                 dutch:
@@ -352,9 +348,7 @@
             )
         }
 
-        public static var if_you_continue_to_experience_issues_please_contact_our_support_team:
-            TranslatedString
-        {
+        public static var if_you_continue_to_experience_issues_please_contact_our_support_team: TranslatedString {
             .init(
                 dutch:
                     "als u problemen blijft ondervinden, neem dan contact op met ons ondersteuningsteam",
@@ -363,8 +357,7 @@
         }
 
         public static
-            var enter_your_email_address_and_we_will_send_you_instructions_to_reset_your_password:
-            TranslatedString
+            var enter_your_email_address_and_we_will_send_you_instructions_to_reset_your_password: TranslatedString
         {
             .init(
                 dutch:
@@ -375,8 +368,7 @@
         }
 
         public static
-            var to_reset_your_password_please_click_the_button_below_and_follow_the_instructions:
-            TranslatedString
+            var to_reset_your_password_please_click_the_button_below_and_follow_the_instructions: TranslatedString
         {
             .init(
                 dutch:
