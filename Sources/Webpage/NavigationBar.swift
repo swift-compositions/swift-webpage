@@ -386,15 +386,18 @@ struct HTMLSourceText<Content: HTML.View>: HTML.View {
 
     let html: Content
     var body: some HTML.View {
-        // swift-format-ignore: NeverUseForceTry
-        // REASON: rendering a statically composed document; a failure is a programmer error.
-        HTML.Text(
-            // swiftlint:disable:next force_try
-            try! String(
+        HTML.Text(Self.render(html))
+    }
+
+    private static func render(_ html: Content) -> String {
+        do {
+            return try String(
                 HTML.Document {
                     html
                 }
             )
-        )
+        } catch {
+            preconditionFailure("A statically composed document renders: \(error)")
+        }
     }
 }

@@ -126,23 +126,16 @@ extension Dependency.Values {
     }
 
     #Preview {
-        // swift-format-ignore: NeverUseForceTry
-        // REASON: preview-only rendering of a static document; a failure is a programmer error.
         HTML.Document {
-            HTML.Text(
-                // swiftlint:disable:next force_try
-                try! String(
-                    HTML.Document {
-                        div {
+            HTMLSourceText(
+                html: div {
 
-                        }
-                        .halftone()
-                        .css
-                        .width(.px(300))
-                        .height(.px(300))
-                        .inlineStyle("background", "linear-gradient(45deg, #ff6b6b, #4ecdc4)")
-                    }
-                )
+                }
+                .halftone()
+                .css
+                .width(.px(300))
+                .height(.px(300))
+                .inlineStyle("background", "linear-gradient(45deg, #ff6b6b, #4ecdc4)")
             )
         }
     }
