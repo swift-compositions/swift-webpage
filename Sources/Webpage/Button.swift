@@ -115,6 +115,16 @@ extension HTML.View {
         background: DarkModeColor,
         style: ButtonStyle = .default
     ) -> some HTML.View {
+        ButtonStyled(content: self, background: background, style: style)
+    }
+}
+
+struct ButtonStyled<Content: HTML.View>: HTML.View {
+    let content: Content
+    let background: DarkModeColor
+    let style: ButtonStyle
+
+    var body: some HTML.View {
 
         let borderStyle: BorderStyle? = {
             switch style {
@@ -174,7 +184,7 @@ extension HTML.View {
         }()
 
         return
-            self
+            content
             .css
 
             .padding(

@@ -24,16 +24,7 @@ public struct Card<Content: HTML.View, Header: HTML.View, Footer: HTML.View>: HT
         >
     {
         VStack(spacing: .rem(0)) {
-            div {
-                header
-            }
-            .css
-            .light {
-                $0.borderBottom(width: .px(1), style: .solid, color: .hex("#e8e8e8"))
-            }
-            .dark {
-                $0.borderBottom(width: .px(1), style: .solid, color: .hex("#3d3d3d"))
-            }
+            HeaderSection(content: header)
 
             VStack {
                 VStack(spacing: .rem(0)) { content }
@@ -57,5 +48,24 @@ public struct Card<Content: HTML.View, Header: HTML.View, Footer: HTML.View>: HT
         .inlineStyle("box-shadow", "0 4px 12px rgba(0, 0, 0, 0.1)")
         .borderRadius(.length(7.5.px))
         .overflow(.hidden)
+    }
+}
+
+extension Card {
+    struct HeaderSection: HTML.View {
+        let content: Header
+
+        var body: some HTML.View {
+            div {
+                content
+            }
+            .css
+            .light {
+                $0.borderBottom(width: .px(1), style: .solid, color: .hex("#e8e8e8"))
+            }
+            .dark {
+                $0.borderBottom(width: .px(1), style: .solid, color: .hex("#3d3d3d"))
+            }
+        }
     }
 }

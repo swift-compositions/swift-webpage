@@ -96,27 +96,7 @@ public struct NavigationBar: HTML.View {
 
                 MenuButtonLabel()
 
-                div {
-                    HTMLForEach(items) { item in
-
-                        if "\(type(of: item))".contains("NavSpacer") {
-                            HTML.Empty()
-                        } else {
-                            div {
-                                HTML.AnyView(item)
-                            }
-                            .css
-                            .padding(.rem(1))
-                            .borderBottom(width: .px(1), style: .solid, color: .border.tertiary)
-                        }
-                    }
-                }
-                .class("mobile-menu")
-                .css
-                .flexBasis(.percent(100))
-                .borderTop(width: .px(1), style: .solid, color: .border.secondary)
-
-                .marginTop(.rem(1))
+                MobileMenu(items: items)
             }
             .css
             .display(.flex)
@@ -157,6 +137,34 @@ public struct NavigationBar: HTML.View {
         }
         .if(let: backgroundColor) { nav, color in
             nav.css.backgroundColor(color)
+        }
+    }
+
+    struct MobileMenu: HTML.View {
+        let items: [any NavItem]
+
+        var body: some HTML.View {
+            div {
+                HTMLForEach(items) { item in
+
+                    if "\(type(of: item))".contains("NavSpacer") {
+                        HTML.Empty()
+                    } else {
+                        div {
+                            HTML.AnyView(item)
+                        }
+                        .css
+                        .padding(.rem(1))
+                        .borderBottom(width: .px(1), style: .solid, color: .border.tertiary)
+                    }
+                }
+            }
+            .class("mobile-menu")
+            .css
+            .flexBasis(.percent(100))
+            .borderTop(width: .px(1), style: .solid, color: .border.secondary)
+
+            .marginTop(.rem(1))
         }
     }
 
