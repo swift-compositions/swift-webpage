@@ -7,6 +7,7 @@ extension NavigationBar.MobileMenu {
 }
 
 extension NavigationBar.MobileMenu.Item {
+    @HTML.Builder
     var body: some HTML.View {
         if "\(type(of: item))".contains("NavSpacer") {
             HTML.Empty()
