@@ -145,7 +145,9 @@ public struct NavigationBar: HTML.View {
 
         var body: some HTML.View {
             div {
-                HTMLForEach(items, content: Item.init(item:))
+                for item in items {
+                    Item(item: item)
+                }
             }
             .class("mobile-menu")
             .css
