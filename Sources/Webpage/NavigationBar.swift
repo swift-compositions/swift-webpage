@@ -146,7 +146,7 @@ public struct NavigationBar: HTML.View {
         var body: some HTML.View {
             div {
                 HTMLForEach(items) { item in
-                    Item(item: item)
+                    HTML.AnyView(Item(item: item))
                 }
             }
             .class("mobile-menu")
