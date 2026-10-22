@@ -146,17 +146,7 @@ public struct NavigationBar: HTML.View {
         var body: some HTML.View {
             div {
                 HTMLForEach(items) { item in
-
-                    if "\(type(of: item))".contains("NavSpacer") {
-                        HTML.Empty()
-                    } else {
-                        div {
-                            HTML.AnyView(item)
-                        }
-                        .css
-                        .padding(.rem(1))
-                        .borderBottom(width: .px(1), style: .solid, color: .border.tertiary)
-                    }
+                    Item(item: item)
                 }
             }
             .class("mobile-menu")
