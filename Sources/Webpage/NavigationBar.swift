@@ -141,13 +141,17 @@ public struct NavigationBar: HTML.View {
     }
 
     struct MobileMenu: HTML.View {
-        let items: [any NavItem]
+        let content: [HTML.AnyView]
+
+        init(items: [any NavItem]) {
+            var content: [HTML.AnyView] = []
+            for item in items {
+                content.append(HTML.AnyView(Item(item: item)))
+            }
+            self.content = content
+        }
 
         var body: some HTML.View {
-            let content: [HTML.AnyView] = items.map { item in
-                HTML.AnyView(Item(item: item))
-            }
-
             div {
                 content
             }
