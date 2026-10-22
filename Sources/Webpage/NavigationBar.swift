@@ -144,10 +144,12 @@ public struct NavigationBar: HTML.View {
         let items: [any NavItem]
 
         var body: some HTML.View {
+            let content: [HTML.AnyView] = items.map { item in
+                HTML.AnyView(Item(item: item))
+            }
+
             div {
-                HTMLForEach(items) { item in
-                    HTML.AnyView(Item(item: item))
-                }
+                content
             }
             .class("mobile-menu")
             .css
