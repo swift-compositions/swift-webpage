@@ -23,53 +23,52 @@ extension NavigationBar {
         @Test
         func `mobile menu rendering remains unchanged`() throws {
             let rendered = try String(
-                HTML.Document {
-                    MobileMenu(
-                        items: [
-                            Link("Articles", href: "/articles"),
-                            NavSpacer(),
-                            Link("Contact", href: "/contact"),
-                        ]
-                    )
+                MobileMenu(
+                    items: [
+                        Link("Articles", href: "/articles"),
+                        NavSpacer(),
+                        Link("Contact", href: "/contact"),
+                    ]
+                )
+            )
+            let articles = HTML.AnyView(
+                div {
+                    Link("Articles", href: "/articles")
                 }
+                .css
+                .padding(.rem(1))
+                .borderBottom(
+                    width: .px(1),
+                    style: .solid,
+                    color: .border.tertiary
+                )
+            )
+            let contact = HTML.AnyView(
+                div {
+                    Link("Contact", href: "/contact")
+                }
+                .css
+                .padding(.rem(1))
+                .borderBottom(
+                    width: .px(1),
+                    style: .solid,
+                    color: .border.tertiary
+                )
             )
             let snapshot = try String(
-                HTML.Document {
-                    div {
-                        div {
-                            Link("Articles", href: "/articles")
-                        }
-                        .css
-                        .padding(.rem(1))
-                        .borderBottom(
-                            width: .px(1),
-                            style: .solid,
-                            color: .border.tertiary
-                        )
-
-                        HTML.Empty()
-
-                        div {
-                            Link("Contact", href: "/contact")
-                        }
-                        .css
-                        .padding(.rem(1))
-                        .borderBottom(
-                            width: .px(1),
-                            style: .solid,
-                            color: .border.tertiary
-                        )
-                    }
-                    .class("mobile-menu")
-                    .css
-                    .flexBasis(.percent(100))
-                    .borderTop(
-                        width: .px(1),
-                        style: .solid,
-                        color: .border.secondary
-                    )
-                    .marginTop(.rem(1))
+                div {
+                    articles
+                    contact
                 }
+                .class("mobile-menu")
+                .css
+                .flexBasis(.percent(100))
+                .borderTop(
+                    width: .px(1),
+                    style: .solid,
+                    color: .border.secondary
+                )
+                .marginTop(.rem(1))
             )
 
             #expect(rendered == snapshot)
